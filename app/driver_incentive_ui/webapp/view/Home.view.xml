@@ -1,0 +1,179 @@
+<mvc:View
+    controllerName="com.cy.driverincentiveui.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <f:DynamicPage id="dynamicPage">
+        <!-- <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                     <Text text="{i18n>title}"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title> -->
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <fb:FilterBar
+                        id="filterbar"
+                        useToolbar="false"
+                        search=".onSearch"
+                        filterChange=".onFilterChange"
+                    >
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem
+                                name="brand"
+                                label="Brand"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input placeholder="Applebees" />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="location"
+                                label="Loaction"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input placeholder="ANDALOUS" />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="date"
+                                label="Request Date"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <DateRangeSelection
+                                        id="DRS1"
+                                        class="DRS1"
+
+                                        change="handleChange"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="eligibility"
+                                label="Elgiibility"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <ComboBox
+                                    >
+                                        <core:Item
+                                            key="yes"
+                                            text="Yes"
+                                        />
+                                        <core:Item
+                                            key="no"
+                                            text="No"
+                                        />
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <Table
+                id="idIncentiveTable"
+                items="{/IncentiveList}"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title
+                            text="Driver Incentive List"
+                        />
+                        <ToolbarSpacer />
+                        <Button
+                            text="New Driver Incentive"
+                            type="Accept"
+                            enabled="false"
+                        />
+                        <Button
+                            icon="sap-icon://excel-attachment"
+                            type="Emphasized"
+                            press=".onExport"
+                        />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column
+                        width="12em"
+                        headerMenu="columnHeaderMenu"
+                    >
+                        <Text text="ID" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Text text="Date" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                        hAlign="End"
+                    >
+                        <Text text="Brand" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                        hAlign="Center"
+                    >
+                        <Text text="Loaction Code" />
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="Loacation" />
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="Driver" />
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="Incentive" />
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="Order Count" />
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="GS Count" />
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="Eligibility" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem
+                        vAlign="Middle"
+                        type="Navigation"
+                    >
+                        <cells>
+                            <Text text="{ID}" />
+                            <Text text="{date}" />
+                            <Text text="{brand}" />
+                            <Text text="{locationCode}" />
+                            <Text text="{location}" />
+                            <Text text="{driver}" />
+                            <Text text="{incentive}" />
+                            <Text text="{orderCount}" />
+                            <Text text="{gsCount}" />
+                            <Text text="{eligibility}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],e=>{"use strict";return e.extend("com.cy.driverincentiveui.controller.Basecontroller",{getModel:function(e){return this.getView().getModel(e)}})});
+//# sourceMappingURL=BaseController.js.map
