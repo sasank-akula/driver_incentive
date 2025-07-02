@@ -25,41 +25,11 @@ modules:
   - name: driver_incentive-db
   parameters:
     buildpack: nodejs_buildpack
-- name: driver_incentive-destination-content
-  type: com.sap.application.content
-  requires:
-  - name: driver_incentive-destination-service
-    parameters:
-      content-target: true
-  - name: driver_incentive_html_repo_host
-    parameters:
-      service-key:
-        name: driver_incentive_html_repo_host-key
-  - name: uaa_driver_incentive
-    parameters:
-      service-key:
-        name: uaa_driver_incentive-key
-  parameters:
-    content:
-      instance:
-        destinations:
-        - Name: driver_incentive_driver_incentive_html_repo_host
-          ServiceInstanceName: driver_incentive-html5-app-host-service
-          ServiceKeyName: driver_incentive_html_repo_host-key
-          sap.cloud.service: driver_incentive
-        - Authentication: OAuth2UserTokenExchange
-          Name: driver_incentive_uaa_driver_incentive
-          ServiceInstanceName: driver_incentive-xsuaa-service
-          ServiceKeyName: uaa_driver_incentive-key
-          sap.cloud.service: driver_incentive
-        existing_destinations_policy: ignore
-  build-parameters:
-    no-source: true
 - name: driver_incentive-app-content
   type: com.sap.application.content
   path: .
   requires:
-  - name: driver_incentive_html_repo_host
+  - name: driver_incentive-repo-host
     parameters:
       content-target: true
   build-parameters:
@@ -79,12 +49,48 @@ modules:
     - npm install
     - npm run build:cf
     supported-platforms: []
+- name: driver_incentive-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: driver_incentive-destination-service
+    parameters:
+      content-target: true
+  - name: driver_incentive-repo-host
+    parameters:
+      service-key:
+        name: driver_incentive-repo-host-key
+  - name: uaa_driver_incentive
+    parameters:
+      service-key:
+        name: uaa_driver_incentive-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: driver_incentive_driver_incentive_repo_host
+          ServiceInstanceName: driver_incentive-html5-service
+          ServiceKeyName: driver_incentive-repo-host-key
+          sap.cloud.service: driver_incentive
+        - Authentication: OAuth2UserTokenExchange
+          Name: driver_incentive_uaa_driver_incentive
+          ServiceInstanceName: driver_incentive-xsuaa-service
+          ServiceKeyName: uaa_driver_incentive-key
+          sap.cloud.service: driver_incentive
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
 resources:
 - name: driver_incentive-db
   type: com.sap.xs.hdi-container
   parameters:
     service: hana
     service-plan: hdi-shared
+- name: driver_incentive-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: driver_incentive-html5-service
+    service-plan: app-host
 - name: driver_incentive-destination-service
   type: org.cloudfoundry.managed-service
   parameters:
@@ -112,12 +118,6 @@ resources:
     service-plan: lite
   requires:
   - name: srv-api
-- name: driver_incentive_html_repo_host
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: html5-apps-repo
-    service-name: driver_incentive-html5-app-host-service
-    service-plan: app-host
 - name: uaa_driver_incentive
   type: org.cloudfoundry.managed-service
   parameters:

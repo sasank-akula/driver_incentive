@@ -22,13 +22,14 @@ sap.ui.define([
                 var sPropertyName = aFilterItem.getName();
                var sValue=aFilterItem.getControl().getValue();
                if (sValue) {
+                
                 if (sPropertyName === 'date') {
+                    // use correct '-' in split get it from debugger
                     var aDateParts = sValue.split(' - ');
                     var sStartDateString = aDateParts[0];
                     var sEndDateString = aDateParts[1];
                     var oStartDate = new Date(sStartDateString);
                     var oEndDate = new Date(sEndDateString);
-                    debugger
                     var sFormattedStartDate = that.formatDate(oStartDate);
                     var sFormattedEndDate = that.formatDate(oEndDate);
                     var oStartDateFilter = new Filter(sPropertyName, FilterOperator.BT, sFormattedStartDate, sFormattedEndDate);

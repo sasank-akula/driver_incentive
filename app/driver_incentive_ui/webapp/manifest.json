@@ -36,6 +36,16 @@
             "parameters": {},
             "additionalParameters": "allowed"
           }
+        },
+        "driverIncentive-Display": {
+          "semanticObject": "driverIncentive",
+          "action": "Display",
+          "title": "{{driverIncentive-Display.flpTitle}}",
+          "subTitle": "{{driverIncentive-Display.flpSubtitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
         }
       }
     }
