@@ -1,13 +1,14 @@
 namespace com.cy.driver;
 
-using {cuid} from '@sap/cds/common';
+using {cuid,managed} from '@sap/cds/common';
 
 type Eligibility : String enum {
     Yes;
     No;
 };
 
-entity IncentiveList : cuid{
+entity IncentiveList : cuid,managed{
+    email        : String;
     date         : Date;
     brand        : String;
     locationCode : String;

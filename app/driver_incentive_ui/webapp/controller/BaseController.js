@@ -6,7 +6,7 @@ sap.ui.define([
     return Controller.extend("com.cy.driverincentiveui.controller.Basecontroller", {
 
         getModel: function (sName) {
-            return this.getView().getModel(sName);
+            return this.getOwnerComponent().getModel(sName);
         }
             
         });

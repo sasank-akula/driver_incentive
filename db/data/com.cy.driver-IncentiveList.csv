@@ -1,21 +1,11 @@
-ID,date,brand,locationCode,location,driver,incentive,orderCount,gsCount,eligibility
-1,2025-06-01,BrandA,LOC001,New York,John Doe,50,120,30,Yes
-2,2025-06-01,BrandB,LOC002,Los Angeles,Jane Smith,30,90,20,No
-3,2025-06-02,BrandC,LOC003,Chicago,Alan Brown,45,100,25,Yes
-4,2025-06-02,BrandA,LOC004,Houston,Emily Davis,20,60,10,No
-5,2025-06-03,BrandB,LOC005,Phoenix,Liam Johnson,35,80,15,Yes
-6,2025-06-03,BrandC,LOC006,Philadelphia,Olivia Miller,40,95,22,Yes
-7,2025-06-04,BrandA,LOC007,San Antonio,Noah Wilson,25,70,12,No
-8,2025-06-04,BrandB,LOC008,San Diego,Emma Taylor,55,130,35,Yes
-9,2025-06-05,BrandC,LOC009,Dallas,James Anderson,30,85,18,No
-10,2025-06-05,BrandA,LOC010,San Jose,Ava Thomas,60,140,38,Yes
-11,2025-06-06,BrandB,LOC011,Austin,Lucas Jackson,45,105,26,Yes
-12,2025-06-06,BrandC,LOC012,Fort Worth,Mia White,20,50,8,No
-13,2025-06-07,BrandA,LOC013,Columbus,Benjamin Harris,55,115,29,Yes
-14,2025-06-07,BrandB,LOC014,Charlotte,Charlotte Martin,35,75,14,No
-15,2025-06-08,BrandC,LOC015,San Francisco,Henry Thompson,40,100,24,Yes
-16,2025-06-08,BrandA,LOC016,Indianapolis,Sophia Garcia,25,65,11,No
-17,2025-06-09,BrandB,LOC017,Seattle,Jack Martinez,50,125,33,Yes
-18,2025-06-09,BrandC,LOC018,Denver,Amelia Robinson,30,85,17,No
-19,2025-06-10,BrandA,LOC019,Washington DC,Daniel Clark,60,145,39,Yes
-20,2025-06-10,BrandB,LOC020,Boston,Isabella Rodriguez,35,78,13,No
+ID,email,date,brand,locationCode,location,driver,incentive,orderCount,gsCount,eligibility,createdAt,createdBy,modifiedAt,modifiedBy
+1,akulapoornasasank@gmail.com,2025-06-15,Toyota,LOC001,New York,John Doe,100,25,10,Yes,2025-06-01,admin,2025-06-10,manager
+2,hemanthkumarkothapally@gmail.com,2025-06-15,Ford,LOC002,Los Angeles,Jane Smith,120,30,12,Yes,2025-06-02,admin,2025-06-11,manager
+3,sasankakula6@gmail.com,2025-06-15,Honda,LOC003,Chicago,Mark Jones,90,20,9,No,2025-06-03,admin,2025-06-12,manager
+4,akulapoornasasank@gmail.com,2025-06-15,Chevrolet,LOC004,Houston,Lisa Brown,110,28,11,Yes,2025-06-04,admin,2025-06-13,manager
+5,hemanthkumarkothapally@gmail.com,2025-06-15,BMW,LOC005,Phoenix,Tom Wilson,105,22,10,Yes,2025-06-05,admin,2025-06-14,manager
+6,sasankakula6@gmail.com,2025-06-15,Audi,LOC006,Philadelphia,Nancy Green,115,26,13,Yes,2025-06-06,admin,2025-06-15,manager
+7,akulapoornasasank@gmail.com,2025-06-15,Hyundai,LOC007,San Antonio,Jack Lee,95,18,7,No,2025-06-07,admin,2025-06-16,manager
+8,hemanthkumarkothapally@gmail.com,2025-06-15,Nissan,LOC008,San Diego,Emma Taylor,130,32,14,Yes,2025-06-08,admin,2025-06-17,manager
+9,sasankakula6@gmail.com,2025-06-15,Kia,LOC009,Dallas,Ryan White,85,15,6,No,2025-06-09,admin,2025-06-18,manager
+10,akulapoornasasank@gmail.com,2025-06-15,Mercedes,LOC010,San Jose,Olivia Hall,140,35,15,Yes,2025-06-10,admin,2025-06-19,manager

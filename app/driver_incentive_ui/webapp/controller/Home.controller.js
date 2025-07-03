@@ -2,51 +2,56 @@ sap.ui.define([
     "com/cy/driverincentiveui/controller/BaseController",
     "sap/ui/export/Spreadsheet",
     "sap/ui/export/library",
-   "sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator",
-], (BaseController, Spreadsheet, exportLibrary,Filter,FilterOperator) => {
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+], (BaseController, Spreadsheet, exportLibrary, Filter, FilterOperator) => {
     "use strict";
     const EdmType = exportLibrary.EdmType;
     return BaseController.extend("com.cy.driverincentiveui.controller.Home", {
 
         onInit() {
+            debugger
+            this.getModel().bindContext("/userdetails()").requestObject().then(function(oData) {
+                console.log("Function result:", oData);
+            }).catch(function(oError) {
+                console.error("Function call failed", oError);
+            });
+             },
+        onSearch: function () {
+            var that = this
+            var oFilterbar = this.byId("filterbar")
+            var aFilterItems = oFilterbar.getAllFilterItems();
+            var aFilters = []
 
-        },
-        onSearch:function(){                 
-            var that = this    
-            var oFilterbar = this.byId("filterbar") 
-            var aFilterItems= oFilterbar.getAllFilterItems();
-           var aFilters=[]
-           
             aFilterItems.forEach((aFilterItem) => {
                 var sPropertyName = aFilterItem.getName();
-               var sValue=aFilterItem.getControl().getValue();
-               if (sValue) {
-                
-                if (sPropertyName === 'date') {
-                    // use correct '-' in split get it from debugger
-                    var aDateParts = sValue.split(' - ');
-                    var sStartDateString = aDateParts[0];
-                    var sEndDateString = aDateParts[1];
-                    var oStartDate = new Date(sStartDateString);
-                    var oEndDate = new Date(sEndDateString);
-                    var sFormattedStartDate = that.formatDate(oStartDate);
-                    var sFormattedEndDate = that.formatDate(oEndDate);
-                    var oStartDateFilter = new Filter(sPropertyName, FilterOperator.BT, sFormattedStartDate, sFormattedEndDate);
-                    aFilters.push(oStartDateFilter);
-                } else {
-                    var oFilter = new Filter(sPropertyName, "Contains", sValue);
-                    aFilters.push(oFilter);
+                var sValue = aFilterItem.getControl().getValue();
+                if (sValue) {
+
+                    if (sPropertyName === 'date') {
+                        // use correct '-' in split get it from debugger
+                        var aDateParts = sValue.split(' - ');
+                        var sStartDateString = aDateParts[0];
+                        var sEndDateString = aDateParts[1];
+                        var oStartDate = new Date(sStartDateString);
+                        var oEndDate = new Date(sEndDateString);
+                        var sFormattedStartDate = that.formatDate(oStartDate);
+                        var sFormattedEndDate = that.formatDate(oEndDate);
+                        var oStartDateFilter = new Filter(sPropertyName, FilterOperator.BT, sFormattedStartDate, sFormattedEndDate);
+                        aFilters.push(oStartDateFilter);
+                    } else {
+                        var oFilter = new Filter(sPropertyName, "Contains", sValue);
+                        aFilters.push(oFilter);
+                    }
                 }
-            }
             });
             var oTable = this.byId("idIncentiveTable");
-                var oBinding = oTable.getBinding("items");
-                // let aFilter = [new Filter({
-                //     filters: aFilters,
-                //     and: false
-                // })]
-                oBinding.filter(aFilters);
+            var oBinding = oTable.getBinding("items");
+            // let aFilter = [new Filter({
+            //     filters: aFilters,
+            //     and: false
+            // })]
+            oBinding.filter(aFilters);
         },
 
         formatDate: function (date) {
@@ -74,7 +79,7 @@ sap.ui.define([
                 },
                 dataSource: oRowBinding,
                 fileName: "Table export sample.xlsx",
-                worker: false 
+                worker: false
             };
 
             const oSheet = new Spreadsheet(oSettings);

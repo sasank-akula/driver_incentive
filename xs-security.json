@@ -4,17 +4,30 @@
   "description": "Security profile of called application",
   "scopes": [
     {
-      "name": "uaa.user",
-      "description": "UAA"
+      "name": "$XSAPPNAME.incentiveAdmin",
+      "description": "A Admin can access the all incentives of all users"
+    },
+    {
+      "name": "$XSAPPNAME.incentiveDriver",
+      "description": "Driver can manage his incentives only"
     }
   ],
   "role-templates": [
     {
-      "name": "Token_Exchange",
-      "description": "UAA",
+      "name": "incentiveAdmin",
+      "description": "A Admin can access the all incentives of all drivers",
       "scope-references": [
-        "uaa.user"
+        "$XSAPPNAME.incentiveAdmin"
+      ]
+    },
+    {
+      "name": "incentiveDriver",
+      "description": "Driver can manage his incentives only",
+      "scope-references": [
+        "$XSAPPNAME.incentiveDriver"
       ]
     }
-  ]
+  ],
+  
+  "attributes": []
 }

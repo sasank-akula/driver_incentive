@@ -1,0 +1,56 @@
+@server=http://localhost:4004
+
+
+### IncentiveList
+# @name IncentiveList_GET
+GET {{server}}/odata/v4/incentive/IncentiveList
+
+
+
+### IncentiveList
+# @name IncentiveList_POST
+POST {{server}}/odata/v4/incentive/IncentiveList
+Content-Type: application/json
+
+{
+  "ID": "18983449-226c-46bf-9415-7ee941ec8d8f",
+  "date": "2021-08-30",
+  "brand": "brand-18983449",
+  "locationCode": "locationCode-18983449",
+  "location": "location-18983449",
+  "driver": "driver-18983449",
+  "incentive": 90,
+  "orderCount": 53,
+  "gsCount": 79,
+  "eligibility": "Yes"
+  
+}
+
+
+### IncentiveList
+# @name IncentiveList_PATCH
+PATCH {{server}}/odata/v4/incentive/IncentiveList/18983449-226c-46bf-9415-7ee941ec9d8f
+Content-Type: application/json
+
+{
+  "ID": "18983449-226c-46bf-9415-7ee941ec9d8f",
+  "date": "2021-08-30",
+  "brand": "brand-18983449",
+  "locationCode": "locationCode-18983449",
+  "location": "location-18983449",
+  "driver": "driver-18983449",
+  "incentive": 90,
+  "orderCount": 53,
+  "gsCount": 79,
+  "eligibility": "Yes",
+  "createdAt": "2012-01-26T00:00:00.000Z",
+  "createdBy": "createdBy.bavq1@example.net",
+  "modifiedAt": "2002-12-14T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.bavq1@example.org"
+}
+
+
+### IncentiveList
+# @name IncentiveList_DELETE
+DELETE {{server}}/odata/v4/incentive/IncentiveList/18983449-226c-46bf-9415-7ee941ec9d8f
+Content-Type: application/json
