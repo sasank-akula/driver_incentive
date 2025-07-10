@@ -5,9 +5,19 @@ sap.ui.define([
 
     return Controller.extend("com.cy.driverincentiveui.controller.Basecontroller", {
 
-        getModel: function (sName) {
-            return this.getOwnerComponent().getModel(sName);
-        }
-            
-        });
+      
+		getRouter : function () {
+			return this.getOwnerComponent().getRouter();
+		},
+
+	
+		getModel : function (sName) {
+			return this.getView().getModel(sName);
+		},
+
+	
+		setModel : function (oModel, sName) {
+			return this.getView().setModel(oModel, sName);
+		}
     });
+});

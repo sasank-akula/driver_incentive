@@ -1,0 +1,182 @@
+<mvc:View controllerName="com.cy.driverincentiveui.controller.IncentiveDetail"
+	xmlns:m="sap.m"
+	xmlns="sap.uxap"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc">
+	<ObjectPageLayout id="ObjectPageLayout">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle">
+				<expandedHeading>
+					<m:Title id="_IDGenTitle1" text="Request ID : {IncentiveItemModel>/ID}" wrapping="true" />
+				</expandedHeading>
+				<expandedContent>
+					<m:Text id="_IDGenText" text="Status : submitted" />
+				</expandedContent>
+
+				<actions>
+					<m:Button id="_IDGenButton" icon="sap-icon://full-screen" press=".onExpandMidCoumn" />
+					<m:Button id="_IDGenButton1" icon="sap-icon://decline" press=".onCloseMidColumn" />
+					<!-- <m:OverflowToolbarButton icon="sap-icon://action" type="Transparent" text="Share" tooltip="action"/> -->
+				</actions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+		<sections>
+			<ObjectPageSection titleUppercase="false" id="idstoreDetails" title="Store Details">
+				<subSections>
+					<ObjectPageSubSection id="_IDGenObjectPageSubSection">
+						<blocks>
+							<f:SimpleForm id="SimpleFormChange480_12120Dual" editable="true" layout="ColumnLayout">
+								<f:content>
+
+									<m:Label id="_IDGenLabel" text="Brand" />
+									<m:Input id="_IDGenInput" value="{brand}" required="true"/>
+									<m:Label id="_IDGenLabel6" text="MOD Emp #." />
+									<m:Input id="_IDGenInput1" value="{ID}" required="true"/>
+									<m:Label id="_IDGenLabel1" text="Business Date" />
+									<m:DatePicker required="true" id="_IDGenDatePicker" placeholder="Enter Date" change="handleChange" class="sapUiSmallMarginBottom"/>
+
+									<m:Label id="_IDGenLabel4" text="Location" />
+									<m:Input id="_IDGenInput5" value="{}" type="Url" required="true"/>
+									<m:Label id="_IDGenLabel8" text="Employee Name" />
+									<m:Input id="_IDGenInput8" value="{}" type="Url" required="true"/>
+									<m:Label id="_IDGenLabel5" text="Location Code" />
+									<m:Input id="_IDGenInput6" value="{}" required="true" />
+								</f:content>
+							</f:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+
+				</subSections>
+			</ObjectPageSection>
+			<ObjectPageSection id="_IDGenObjectPageSection1">
+				<subSections>
+
+					<ObjectPageSubSection id="personalSS1" title="Driver Details" titleUppercase="false">
+						<blocks>
+							<m:Table id="_IDGenTable1" items="{IncentiveItemModel>/items}">
+								<m:headerToolbar>
+									<m:OverflowToolbar id="_IDGenOverflowToolbar">
+										<m:ToolbarSpacer id="_IDGenToolbarSpacer" />
+										<m:Button id="_IDGenButton2" text="Add" icon="sap-icon://add" type="Accept" enabled="true" press=".onAddDriver"/>
+										<m:Button id="_IDGenButton3" icon="sap-icon://simulate" type="Neutral" text="Calculate" press=".onCalculate" />
+									</m:OverflowToolbar>
+								</m:headerToolbar>
+								<m:columns>
+									<m:Column id="_IDGenColumn" minScreenWidth="Tablet" demandPopin="true">
+										<m:Label id="_IDGenLabel3" required="true" text="Employee No" wrapping="true" />
+										<m:footer>
+											<m:Text id="_IDGenText1" text="Total:"></m:Text>
+										</m:footer>
+										<!-- <m:Text id="_IDGenText1" /> -->
+									</m:Column>
+									<m:Column id="_IDGenColumn1" minScreenWidth="Tablet" demandPopin="true">
+										<m:Label id="_IDGenLabel2" required="true" text="Employee Name" wrapping="true" />
+									</m:Column>
+									<m:Column id="_IDGenColumn2" minScreenWidth="Tablet" demandPopin="true">
+										<m:Label id="_IDGenLabel7" required="true" text="Chipsy Emp#" wrapping="true" />
+									</m:Column>
+									<m:Column id="_IDGenColumn3" minScreenWidth="Tablet" demandPopin="true">
+										<m:Label id="_IDGenLabel9" required="true" text="Incentive Type" wrapping="true" />
+									</m:Column>
+									<m:Column id="_IDGenColumn4" minScreenWidth="Tablet" demandPopin="true">
+										<m:Label id="_IDGenLabel10" required="true" text="Order Delivered" wrapping="true" />
+										<m:footer>
+											<m:Text id="_IDGenText4" text="{IncentiveHeaderModel>/totalOrderDelivered}"></m:Text>
+										</m:footer>
+									</m:Column >
+									<m:Column id="_IDGenColumn5" minScreenWidth="Tablet" demandPopin="true">
+										<m:Label id="_IDGenLabel11" required="true" text="CDM Cash Received" wrapping="true" />
+										<m:footer>
+											<m:Text id="_IDGenText5" text="{IncentiveHeaderModel>/totalCdmCashRecieved}"></m:Text>
+										</m:footer>
+									</m:Column>
+									<m:Column id="_IDGenColumn6" minScreenWidth="Tablet" demandPopin="true">
+										<m:Label id="_IDGenLabel12" required="true" text="CDM Incentive Cost" wrapping="true" />
+										<m:footer>
+											<m:Text id="_IDGenText6" text="{IncentiveHeaderModel>/totalCdmIncentive}"></m:Text>
+										</m:footer>
+									</m:Column>
+									<m:Column id="_IDGenColumn7" minScreenWidth="Tablet" demandPopin="true">
+										<m:Label id="_IDGenLabel13" required="true" text="CDM Cash Deposit" wrapping="true" />
+										<m:footer>
+											<m:Text id="_IDGenText7" text="{IncentiveHeaderModel>/totalCdmCashDeposit}"></m:Text>
+										</m:footer>
+									</m:Column>
+									<m:Column id="_IDGenColumn8" minScreenWidth="Tablet" demandPopin="true">
+										<m:Label id="_IDGenLabel14" text="Action" wrapping="true" />
+									</m:Column>
+								</m:columns>
+								<m:items>
+									<m:ColumnListItem id="_IDGenColumnListItem" >
+										<m:cells>
+											<m:Input id="_IDGenInput3" value="{IncentiveItemModel>EmpNo}" />
+											<m:Text id="_IDGenText2" text="{IncentiveItemModel>EmpName}" />
+											<m:Input id="_IDGenInput4" value="{IncentiveItemModel>GSEmp}"/>
+											<m:ComboBox required="true" id="incentiveCombo" selectedKey="{IncentiveItemModel>IncentiveType}" items="{
+  												   path: 'IncentiveModel>/IncentiveType',
+                                                        templateShareable: true
+  												}">
+												<core:Item id="_IDGenItem" key="{IncentiveModel>key}" text="{IncentiveModel>text}" />
+											</m:ComboBox>
+
+											<m:Input id="_IDGenInput7" type="Number" value="{IncentiveItemModel>OrderDelivered}" required="true"/>
+											<m:Input id="_IDGenInput11" type="Number" value="{IncentiveItemModel>CDMCashReceived}" required="true"/>
+											<m:Input id="_IDGenInput9" type="Number" value="{IncentiveItemModel>CDMIncentiveCost}" required="true" editable="false"/>
+											<m:Input id="_IDGenInput10" type="Number" value="{IncentiveItemModel>CDMCashDeposit}" required="true" editable="false"/>
+											<m:HBox id="_IDGenHBox" gap="5%">
+												<m:Button id="_IDGenButton5" icon="sap-icon://edit" type="Accept"/>
+												<m:Button id="_IDGenButton6" icon="sap-icon://decline" type="Reject" press=".onDeleteRow"/>
+											</m:HBox>
+										</m:cells>
+									</m:ColumnListItem>
+								</m:items>
+							</m:Table>
+						</blocks>
+					</ObjectPageSubSection>
+
+				</subSections>
+			</ObjectPageSection>
+		<ObjectPageSection id="_IDGenObjectPageSection">
+			<subSections>
+				<ObjectPageSubSection id="_IDGenObjectPageSubSection1" title="Incentive Summary">
+					<blocks>
+						<m:Table id="_IDGenTable2" items="{IncentiveSummaryModel>/items}">
+							<m:columns>
+								<m:Column id="_IDGenColumn9" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+									<m:Label id="_IDGenLabel15"   text="Incentive Type"/>
+									<m:footer >
+										<m:Text id="_IDGenText11" text="Total : "/>
+									</m:footer>
+								</m:Column>
+								<m:Column id="_IDGenColumn10" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+									<m:Label id="_IDGenLabel17" text="No of Orders" />
+									<m:footer >
+										<m:Text id="_IDGenText12" text="{IncentiveHeaderModel>/totalOrderDelivered}"/>
+									</m:footer>
+								</m:Column>
+								<m:Column id="_IDGenColumn11" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+									<m:Label id="_IDGenLabel18" text="Incentive"/>
+									<m:footer >
+										<m:Text id="_IDGenText13" text="{IncentiveHeaderModel>/totalCdmIncentive}"/>
+									</m:footer>
+								</m:Column>
+							</m:columns>
+							<m:items>
+								<m:ColumnListItem id="_IDGenColumnListItem1">
+									<m:cells>
+										<m:Text id="_IDGenText8" text="{IncentiveSummaryModel>incentiveType}"/>
+										<m:Text id="_IDGenText9" text="{IncentiveSummaryModel>noOfOrders}"/>
+										<m:Text id="_IDGenText10" text="{IncentiveSummaryModel>incentive}"/>
+									</m:cells>
+								</m:ColumnListItem>
+							</m:items>
+						</m:Table>
+					</blocks>
+				</ObjectPageSubSection>
+			</subSections>
+		</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
+</mvc:View>

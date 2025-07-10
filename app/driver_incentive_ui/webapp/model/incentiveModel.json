@@ -1,0 +1,29 @@
+{
+  "IncentiveType": [
+  {
+    "key": "KFG Driver 0.250",
+    "text": "KFG Driver 0.250"
+  },
+  {
+    "key": "PT Driver 0.150",
+    "text": "PT Driver 0.150"
+  },
+  {
+    "key": "3rd Party 0.100",
+    "text": "3rd Party 0.100"
+  },
+  {
+    "key": "KFG Files 0.125",
+    "text": "KFG Files 0.125"
+  },
+  {
+    "key": "KFG Day Off 0.500",
+    "text": "KFG Day Off 0.500"
+  },
+  {
+    "key": "Not Eligible 0.000",
+    "text": "Not Eligible 0.000"
+  }
+]
+
+}

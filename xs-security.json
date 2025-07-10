@@ -28,6 +28,22 @@
       ]
     }
   ],
+  "role-collections": [
+    {
+      "name": "Driver_Incentive_Admin",
+      "description": "Admin role collection for driver incentive app",
+      "role-template-references": [
+        "$XSAPPNAME.incentiveAdmin"
+      ]
+    },
+    {
+      "name": "Driver_Incentive_Driver", 
+      "description": "Driver role collection for driver incentive app",
+      "role-template-references": [
+        "$XSAPPNAME.incentiveDriver"
+      ]
+    }
+  ],
   
   "attributes": []
 }
