@@ -1,5 +1,3 @@
-
-
 sap.ui.define([
     "com/cy/driverincentiveui/controller/BaseController"
 ], (BaseController) => {
@@ -54,10 +52,9 @@ sap.ui.define([
                 this.getView().getModel("IncentiveItemModel").updateBindings(true);
       },
       onCalculate: function () {
-        const oView = this.getView();
-        const oItemModel = oView.getModel("IncentiveItemModel");
-        const oSummaryModel = oView.getModel("IncentiveSummaryModel");
-        const oHeaderModel = oView.getModel("IncentiveHeaderModel");
+        const oItemModel = this.getModel("IncentiveItemModel");
+        const oSummaryModel = this.getModel("IncentiveSummaryModel");
+        const oHeaderModel = this.getModel("IncentiveHeaderModel");
     
         let aIncentiveItem = oItemModel.getProperty("/items") || [];
         let aIncentives = oSummaryModel.getProperty("/items") || [];
@@ -85,7 +82,6 @@ sap.ui.define([
     
         aIncentiveItem.forEach(oItem => {
             const config = incentiveConfig[oItem.IncentiveType];
-    
             const orderDelivered = Number(oItem.OrderDelivered || 0);
             const cashReceived = Number(oItem.CDMCashReceived || 0);
             let incentiveCost = 0;
@@ -94,7 +90,7 @@ sap.ui.define([
                 incentiveCost = orderDelivered * config.rate;
                 orderCounts[config.key] += orderDelivered;
             }
-    
+            
             oItem.CDMIncentiveCost = incentiveCost;
             oItem.CDMCashDeposit = incentiveCost + cashReceived;
     
@@ -103,6 +99,7 @@ sap.ui.define([
             totals.totalCdmIncentive += incentiveCost;
             totals.totalCdmCashDeposit += oItem.CDMCashDeposit;
         });
+    
         aIncentives.forEach(oSummary => {
             const config = incentiveConfig[oSummary.incentiveType];
             if (config) {
@@ -112,6 +109,8 @@ sap.ui.define([
                 }
             }
         });
+    
+       
         oItemModel.setProperty("/items", aIncentiveItem);
         oItemModel.updateBindings(true);
     
@@ -122,11 +121,9 @@ sap.ui.define([
             totalCdmCashDeposit: totals.totalCdmCashDeposit
         });
         oHeaderModel.updateBindings(true);
-    
         oSummaryModel.setProperty("/items", aIncentives);
         oSummaryModel.updateBindings(true);
     },
-    
       onDeleteRow:function(oEvent){
         let aIncentiveItem = this.getModel("IncentiveItemModel").getProperty("/items") || [];
         let sPath=oEvent.getSource().getBindingContext("IncentiveItemModel").getPath()

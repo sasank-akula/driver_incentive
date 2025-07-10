@@ -10,7 +10,9 @@ sap.ui.define([
     return BaseController.extend("com.cy.driverincentiveui.controller.Home", {
 
         onInit() {
-
+            this.getRouter().getRoute("RouteHome").attachPatternMatched(this._onRouteDriverIncentiveHomeMatched, this);
+        },
+        _onRouteDriverIncentiveHomeMatched:function(){
         },
         onSearch: function () {
             var that = this

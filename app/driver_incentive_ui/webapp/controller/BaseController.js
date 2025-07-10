@@ -15,7 +15,6 @@ sap.ui.define([
 			return this.getView().getModel(sName);
 		},
 
-	
 		setModel : function (oModel, sName) {
 			return this.getView().setModel(oModel, sName);
 		}
