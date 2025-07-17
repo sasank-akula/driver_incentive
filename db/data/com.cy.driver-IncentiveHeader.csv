@@ -1,0 +1,6 @@
+ID,Brand,Location,MOD_Emp,EmployeeName,DateofBusiness,LocationCode,OrderDeliveredTotal,CDMCashReceivedTotal,CDMIncentiveCostTotal,CDMCashDepositTotal,Status,IncentiveRequestNo
+head001,Nike,Hyderabad,emp002,Alice Smith,2025-07-01,HYD001,50,25000,5000.00,24000,Submitted,1001
+head002,Adidas,Bangalore,emp002,Alice Smith,2025-07-01,BLR001,30,15000,3000.00,14000,Draft,1002
+
+
+

@@ -94,6 +94,27 @@
           "autoExpandSelect": true,
           "earlyRequests": true
         }
+      },
+      "IncentiveItemModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {},
+        "preload": false
+      },
+      "IncentiveHeaderModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {},
+        "preload": false
+      },
+      "IncentiveModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/incentiveModel.json",
+        "settings": {},
+        "preload": false
+      },
+      "IncentiveSummaryModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {},
+        "preload": false
       }
     },
     "resources": {
@@ -106,14 +127,13 @@
     "routing": {
       "config": {
         "routerClass": "sap.m.routing.Router",
-        "controlAggregation": "pages",
-        "controlId": "app",
+        "controlId": "layout",
+        "controlAggregation": "beginColumnPages",
         "transition": "slide",
         "type": "View",
         "viewType": "XML",
         "path": "com.cy.driverincentiveui.view",
-        "async": true,
-        "viewPath": "com.cy.driverincentiveui.view"
+        "async": true
       },
       "routes": [
         {
@@ -122,12 +142,30 @@
           "target": [
             "TargetHome"
           ]
+        },
+        {
+          "name": "RouteDetail",
+          "pattern": "RouteDetail/{ID}",
+          "target": [
+            "TargetHome",
+            "TargetDetail"
+          ]
         }
       ],
       "targets": {
         "TargetHome": {
           "id": "Home",
-          "name": "Home"
+          "viewType": "XML",
+          "level": 1,
+          "viewName": "Home",
+          "controlAggregation": "beginColumnPages"
+        },
+        "TargetDetail": {
+          "id": "IncentiveDetail",
+          "viewType": "XML",
+          "level": 1,
+          "viewName": "IncentiveDetail",
+          "controlAggregation": "midColumnPages"
         }
       }
     },

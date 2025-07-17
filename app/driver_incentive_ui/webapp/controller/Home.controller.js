@@ -12,7 +12,7 @@ sap.ui.define([
         onInit() {
             this.getRouter().getRoute("RouteHome").attachPatternMatched(this._onRouteDriverIncentiveHomeMatched, this);
         },
-        _onRouteDriverIncentiveHomeMatched:function(){
+        _onRouteDriverIncentiveHomeMatched: function () {
         },
         onSearch: function () {
             var that = this
@@ -24,8 +24,7 @@ sap.ui.define([
                 var sPropertyName = aFilterItem.getName();
                 var sValue = aFilterItem.getControl().getValue();
                 if (sValue) {
-
-                    if (sPropertyName === 'date') {
+                    if (sPropertyName === 'header/DateofBusiness') {
                         // use correct '-' in split get it from debugger
                         var aDateParts = sValue.split(' - ');
                         var sStartDateString = aDateParts[0];
@@ -61,6 +60,7 @@ sap.ui.define([
 
             return [year, month, day].join('-');
         },
+        
         onExport: function () {
             if (!this._oTable) {
                 this._oTable = this.byId("idIncentiveTable");
@@ -156,10 +156,16 @@ sap.ui.define([
         onItemSelect: function (oEvent) {
             this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
             this.getRouter().navTo("RouteDetail", {
-                ID: oEvent.getSource().getBindingContext().getProperty("ID")
+                ID: oEvent.getSource().getBindingContext().getProperty("header/ID")
+
             });
-
+        },
+        onNewDriverIncentiveBtnPress: function () {
+            this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
+            this.getOwnerComponent().getRouter().navTo("RouteDetail", {
+                ID: 'NEW'
+            });
         }
-
+        
     });
 });

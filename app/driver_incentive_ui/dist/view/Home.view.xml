@@ -1,81 +1,35 @@
-<mvc:View
-    controllerName="com.cy.driverincentiveui.controller.Home"
+<mvc:View controllerName="com.cy.driverincentiveui.controller.Home"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:f="sap.f"
     xmlns:fb="sap.ui.comp.filterbar"
     xmlns="sap.m"
-    xmlns:core="sap.ui.core"
->
+    xmlns:core="sap.ui.core">
     <f:DynamicPage id="dynamicPage">
-        <!-- <f:title>
-            <f:DynamicPageTitle>
-                <f:heading>
-                     <Text text="{i18n>title}"/>
-                </f:heading>
-            </f:DynamicPageTitle>
-        </f:title> -->
         <f:header>
-            <f:DynamicPageHeader>
+            <f:DynamicPageHeader id="_IDGenDynamicPageHeader1">
                 <f:content>
-                    <fb:FilterBar
-                        id="filterbar"
-                        useToolbar="false"
-                        search=".onSearch"
-                        filterChange=".onFilterChange"
-                    >
+                    <fb:FilterBar id="filterbar" useToolbar="false" search=".onSearch" filterChange=".onFilterChange">
                         <fb:filterGroupItems>
-                            <fb:FilterGroupItem
-                                name="brand"
-                                label="Brand"
-                                groupName="Group1"
-                                visibleInFilterBar="true"
-                            >
+                            <fb:FilterGroupItem id="_IDGenFilterGroupItem" name="brand" label="{i18n>filtergroupItemBrandLable}" groupName="Group1" visibleInFilterBar="true">
                                 <fb:control>
-                                    <Input placeholder="Applebees" />
+                                    <Input id="_IDGenInput2" placeholder="{i18n>filtergroupItemBrandPlaceholder}" />
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem
-                                name="location"
-                                label="Loaction"
-                                groupName="Group1"
-                                visibleInFilterBar="true"
-                            >
+                            <fb:FilterGroupItem id="_IDGenFilterGroupItem1" name="location" label="{i18n>filtergroupItemLocationLable}" groupName="Group1" visibleInFilterBar="true">
                                 <fb:control>
-                                    <Input placeholder="ANDALOUS" />
+                                    <Input id="_IDGenInput12" placeholder="{i18n>filtergroupItemLoactionPlaceholder}" />
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem
-                                name="date"
-                                label="Request Date"
-                                groupName="Group1"
-                                visibleInFilterBar="true"
-                            >
+                            <fb:FilterGroupItem id="_IDGenFilterGroupItem2" name="date" label="{i18n>filtergroupItemDateLabel}" groupName="Group1" visibleInFilterBar="true">
                                 <fb:control>
-                                    <DateRangeSelection
-                                        id="DRS1"
-                                        class="DRS1"
-
-                                        change="handleChange"
-                                    />
+                                    <DateRangeSelection id="DRS1" class="DRS1" change="handleChange" />
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem
-                                name="eligibility"
-                                label="Elgiibility"
-                                groupName="Group1"
-                                visibleInFilterBar="true"
-                            >
+                            <fb:FilterGroupItem id="_IDGenFilterGroupItem3" name="eligibility" label="{i18n>filtergroupItemEligibilityLabel}" groupName="Group1" visibleInFilterBar="true">
                                 <fb:control>
-                                    <ComboBox
-                                    >
-                                        <core:Item
-                                            key="yes"
-                                            text="Yes"
-                                        />
-                                        <core:Item
-                                            key="no"
-                                            text="No"
-                                        />
+                                    <ComboBox id="_IDGenComboBox">
+                                        <core:Item id="_IDGenItem1" key="yes" text="{i18n>yes}" />
+                                        <core:Item id="_IDGenItem2" key="no" text="{i18n>no}" />
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
@@ -86,90 +40,60 @@
         </f:header>
 
         <f:content>
-            <Table
-                id="idIncentiveTable"
-                items="{/IncentiveList}"
-            >
+            <Table id="idIncentiveTable" items="{/IncentiveList}">
                 <headerToolbar>
-                    <OverflowToolbar>
-                        <Title
-                            text="Driver Incentive List"
-                        />
-                        <ToolbarSpacer />
-                        <Button
-                            text="New Driver Incentive"
-                            type="Accept"
-                            enabled="false"
-                        />
-                        <Button
-                            icon="sap-icon://excel-attachment"
-                            type="Emphasized"
-                            press=".onExport"
-                        />
+                    <OverflowToolbar id="_IDGenOverflowToolbar1">
+                        <Title id="_IDGenTitle" text="Driver Incentive ({/IncentiveList/$count})" />
+                        <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                        <Button id="_IDGenButton4" text="{i18n>newDriverIncentive}" type="Accept" enabled="true" />
+                        <Button id="_IDGenButton7" icon="sap-icon://excel-attachment" type="Emphasized" press=".onExport" />
                     </OverflowToolbar>
                 </headerToolbar>
                 <columns>
-                    <Column
-                        width="12em"
-                        headerMenu="columnHeaderMenu"
-                    >
-                        <Text text="ID" />
+                    <Column id="_IDGenColumn12" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="_IDGenText3" text="{i18n>columnID}" />
                     </Column>
-                    <Column
-                        minScreenWidth="Tablet"
-                        demandPopin="true"
-                    >
-                        <Text text="Date" />
+                    <Column id="_IDGenColumn13" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="_IDGenText14" text="{i18n>columnDate}" />
                     </Column>
-                    <Column
-                        minScreenWidth="Tablet"
-                        demandPopin="true"
-                        hAlign="End"
-                    >
-                        <Text text="Brand" />
+                    <Column id="_IDGenColumn14" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="_IDGenText15" text="{i18n>columnBrand}" />
                     </Column>
-                    <Column
-                        minScreenWidth="Tablet"
-                        demandPopin="true"
-                        hAlign="Center"
-                    >
-                        <Text text="Loaction Code" />
+                    <Column id="_IDGenColumn15" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="_IDGenText16" text="{i18n>columnLocationCode}" />
                     </Column>
-                    <Column hAlign="End">
-                        <Text text="Loacation" />
+                    <Column id="_IDGenColumn16" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="_IDGenText17" text="{i18n>columnLocation}" />
                     </Column>
-                    <Column hAlign="End">
-                        <Text text="Driver" />
+                    <Column id="_IDGenColumn17" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="_IDGenText18" text="{i18n>columnDriver}" />
                     </Column>
-                    <Column hAlign="End">
-                        <Text text="Incentive" />
+                    <Column id="_IDGenColumn18" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="_IDGenText19" text="{i18n>columnIncentive}" />
                     </Column>
-                    <Column hAlign="End">
-                        <Text text="Order Count" />
+                    <Column id="_IDGenColumn19" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="_IDGenText20" text="{i18n>columnOrderCount}" />
                     </Column>
-                    <Column hAlign="End">
-                        <Text text="GS Count" />
+                    <Column id="_IDGenColumn20" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="_IDGenText21" text="{i18n>columnGSCount}" />
                     </Column>
-                    <Column hAlign="End">
-                        <Text text="Eligibility" />
+                    <Column id="_IDGenColumn21" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="_IDGenText22" text="{i18n>columnEligibility}" />
                     </Column>
                 </columns>
                 <items>
-                    <ColumnListItem
-                        vAlign="Middle"
-                        type="Navigation"
-                    >
+                    <ColumnListItem id="_IDGenColumnListItem2" vAlign="Middle" type="Navigation" press=".onItemSelect">
                         <cells>
-                            <Text text="{ID}" />
-                            <Text text="{date}" />
-                            <Text text="{brand}" />
-                            <Text text="{locationCode}" />
-                            <Text text="{location}" />
-                            <Text text="{driver}" />
-                            <Text text="{incentive}" />
-                            <Text text="{orderCount}" />
-                            <Text text="{gsCount}" />
-                            <Text text="{eligibility}" />
+                            <Text id="_IDGenText23" text="{ID}" />
+                            <Text id="_IDGenText24" text="{date}" />
+                            <Text id="_IDGenText25" text="{brand}" />
+                            <Text id="_IDGenText26" text="{locationCode}" />
+                            <Text id="_IDGenText27" text="{location}" />
+                            <Text id="_IDGenText28" text="{driver}" />
+                            <Text id="_IDGenText29" text="{incentive}" />
+                            <Text id="_IDGenText30" text="{orderCount}" />
+                            <Text id="_IDGenText31" text="{gsCount}" />
+                            <Text id="_IDGenText32" text="{eligibility}" />
                         </cells>
                     </ColumnListItem>
                 </items>

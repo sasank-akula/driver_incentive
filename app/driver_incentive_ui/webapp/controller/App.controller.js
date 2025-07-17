@@ -15,8 +15,9 @@ sap.ui.define([
 				previousLayout : "",
 				actionButtonsInfo : {
 					midColumn : {
-						fullScreen : false
-					}
+						fullScreen : true
+					},
+					smallScreenMode: true
 				}
 			});
 			this.getView().setModel(oViewModel, "appView");

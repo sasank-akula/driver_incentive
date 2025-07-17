@@ -119,7 +119,7 @@ resources:
       service-plan: lite
     requires:
       - name: srv-api
-  - name: uaa_driver_incentive  
+  - name: uaa_driver_incentive
     type: org.cloudfoundry.managed-service
     parameters:
       path: ./xs-security.json

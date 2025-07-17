@@ -1,2 +1,2 @@
-sap.ui.define(["sap/ui/core/mvc/Controller"],e=>{"use strict";return e.extend("com.cy.driverincentiveui.controller.App",{onInit(){}})});
+sap.ui.define(["sap/ui/core/mvc/Controller","sap/ui/model/json/JSONModel"],function(e,n){"use strict";return e.extend("com.cy.driverincentiveui.controller.App",{onInit:function(){var e=new n({busy:true,delay:0,layout:"OneColumn",previousLayout:"",actionButtonsInfo:{midColumn:{fullScreen:false}}});this.getView().setModel(e,"appView")}})});
 //# sourceMappingURL=App.controller.js.map

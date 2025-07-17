@@ -1,0 +1,4 @@
+ID,createdAt,createdBy,modifiedAt,modifiedBy,Name,Email,Phone,Address,DOB,DOJ,Status,Designation,ManagerID_ID
+emp001,,admin,,admin,John Doe,john.doe@example.com,9876543210,123 Main St,1990-03-15,2020-06-01,Active,Driver,
+emp002,,admin,,admin,Alice Smith,alice.smith@example.com,9123456789,456 Oak Rd,1988-07-22,2019-04-10,Active,Manager,
+emp003,,admin,,admin,Robert Brown,robert.brown@example.com,9988776655,789 Pine Ave,1992-12-05,2021-01-15,Active,Driver,emp002

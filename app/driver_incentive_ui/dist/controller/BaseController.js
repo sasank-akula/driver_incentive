@@ -1,2 +1,2 @@
-sap.ui.define(["sap/ui/core/mvc/Controller"],e=>{"use strict";return e.extend("com.cy.driverincentiveui.controller.Basecontroller",{getModel:function(e){return this.getOwnerComponent().getModel(e)}})});
+sap.ui.define(["sap/ui/core/mvc/Controller"],e=>{"use strict";return e.extend("com.cy.driverincentiveui.controller.Basecontroller",{getRouter:function(){return this.getOwnerComponent().getRouter()},getModel:function(e){return this.getView().getModel(e)},setModel:function(e,t){return this.getView().setModel(e,t)}})});
 //# sourceMappingURL=BaseController.js.map

@@ -3,20 +3,17 @@ sap.ui.define([
     "sap/ui/export/Spreadsheet",
     "sap/ui/export/library",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator",
+    "sap/ui/model/FilterOperator"
 ], (BaseController, Spreadsheet, exportLibrary, Filter, FilterOperator) => {
     "use strict";
     const EdmType = exportLibrary.EdmType;
     return BaseController.extend("com.cy.driverincentiveui.controller.Home", {
 
         onInit() {
-            debugger
-            this.getModel().bindContext("/userdetails()").requestObject().then(function(oData) {
-                console.log("Function result:", oData);
-            }).catch(function(oError) {
-                console.error("Function call failed", oError);
-            });
-             },
+            this.getRouter().getRoute("RouteHome").attachPatternMatched(this._onRouteDriverIncentiveHomeMatched, this);
+        },
+        _onRouteDriverIncentiveHomeMatched:function(){
+        },
         onSearch: function () {
             var that = this
             var oFilterbar = this.byId("filterbar")
@@ -155,6 +152,13 @@ sap.ui.define([
             });
 
             return aCols;
+        },
+        onItemSelect: function (oEvent) {
+            this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
+            this.getRouter().navTo("RouteDetail", {
+                ID: oEvent.getSource().getBindingContext().getProperty("ID")
+            });
+
         }
 
     });

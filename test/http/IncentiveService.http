@@ -1,56 +1,355 @@
 @server=http://localhost:4004
+@username=no_user_found_for_roles_authenticated-user
+@password=
 
 
-### IncentiveList
-# @name IncentiveList_GET
-GET {{server}}/odata/v4/incentive/IncentiveList
+### IncentiveHeader
+# @name IncentiveHeader_GET
+GET {{server}}/odata/v4/incentive/IncentiveHeader
+Authorization: Basic {{username}} {{password}}
 
 
-
-### IncentiveList
-# @name IncentiveList_POST
-POST {{server}}/odata/v4/incentive/IncentiveList
+### IncentiveHeader
+# @name IncentiveHeader_POST
+POST {{server}}/odata/v4/incentive/IncentiveHeader
 Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
 
 {
-  "ID": "18983449-226c-46bf-9415-7ee941ec8d8f",
-  "date": "2021-08-30",
-  "brand": "brand-18983449",
-  "locationCode": "locationCode-18983449",
-  "location": "location-18983449",
-  "driver": "driver-18983449",
-  "incentive": 90,
-  "orderCount": 53,
-  "gsCount": 79,
-  "eligibility": "Yes"
-  
+  "ID": "11289600-4390-4dd4-a20f-92ba066f1521",
+  "Brand": "Brand-11289600",
+  "Location": "Location-11289600",
+  "MOD_Emp": "MOD_Emp-11289600",
+  "EmployeeName": "EmployeeName-11289600",
+  "DateofBusiness": "2014-12-25",
+  "LocationCode": "ocationCode-11289600",
+  "OrderDeliveredTotal": 21,
+  "CDMCashReceivedTotal": 10,
+  "CDMIncentiveCostTotal": 10,
+  "CDMCashDepositTotal": 72,
+  "Status": "Submitted",
+  "IncentiveRequestNo": 50,
+  "IncentiveDetailAss": [
+    {
+      "ID": "5735134f-ee75-477d-b6f9-dde974dfc561",
+      "EmpNo": {
+        "ID": "8445185d-88c0-4f49-8020-b906409f20a1"
+      },
+      "EmpName": "EmpName-5735134",
+      "GSEmp": "GSEmp-5735134",
+      "IncentiveType": "ncentiveType-5735134",
+      "OrderDelivered": 20,
+      "CDMCashReceived": 71,
+      "CDMIncentiveCost": 26429792.13,
+      "CDMCashDeposit": 52,
+      "createdAt": "2001-06-18T00:00:00.000Z",
+      "createdBy": "Merle.Gerlach@example.net",
+      "modifiedAt": "2008-05-11T00:00:00.000Z",
+      "modifiedBy": "Lilliana.Koepp91@example.org"
+    },
+    {
+      "ID": "5735135a-6ef3-4c49-a0c0-859b01769ab4",
+      "EmpNo": {
+        "ID": "8445185d-88c0-4f49-8020-b906409f20a1"
+      },
+      "EmpName": "EmpName-5735135",
+      "GSEmp": "GSEmp-5735135",
+      "IncentiveType": "ncentiveType-5735135",
+      "OrderDelivered": 91,
+      "CDMCashReceived": 48,
+      "CDMIncentiveCost": 10589844.29,
+      "CDMCashDeposit": 86,
+      "createdAt": "2017-06-26T00:00:00.000Z",
+      "createdBy": "Ashton.Simonis41@example.net",
+      "modifiedAt": "2004-01-19T00:00:00.000Z",
+      "modifiedBy": "Samara55@example.net"
+    }
+  ],
+  "IncentiveSummaryAss": [
+    {
+      "ID": "14345240-2528-4ceb-8417-c23deb6ce44f",
+      "IncentiveType": "centiveType-14345240",
+      "NoOfOrders": 83,
+      "Incentive": 2668535.14,
+      "createdAt": "2002-07-05T00:00:00.000Z",
+      "createdBy": "Ebba50@example.com",
+      "modifiedAt": "2019-06-27T00:00:00.000Z",
+      "modifiedBy": "Mortimer79@example.org"
+    },
+    {
+      "ID": "14345241-8615-4bb1-93cb-bd152dccb73a",
+      "IncentiveType": "centiveType-14345241",
+      "NoOfOrders": 73,
+      "Incentive": 4149874.15,
+      "createdAt": "2021-07-11T00:00:00.000Z",
+      "createdBy": "Mable.McGlynn@example.org",
+      "modifiedAt": "2020-12-25T00:00:00.000Z",
+      "modifiedBy": "Providenci_Lehner45@example.com"
+    }
+  ]
 }
 
 
-### IncentiveList
-# @name IncentiveList_PATCH
-PATCH {{server}}/odata/v4/incentive/IncentiveList/18983449-226c-46bf-9415-7ee941ec9d8f
+### IncentiveHeader
+# @name IncentiveHeader_PATCH
+PATCH {{server}}/odata/v4/incentive/IncentiveHeader/11289600-4390-4dd4-a20f-92ba066f1521
 Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
 
 {
-  "ID": "18983449-226c-46bf-9415-7ee941ec9d8f",
-  "date": "2021-08-30",
-  "brand": "brand-18983449",
-  "locationCode": "locationCode-18983449",
-  "location": "location-18983449",
-  "driver": "driver-18983449",
-  "incentive": 90,
-  "orderCount": 53,
-  "gsCount": 79,
-  "eligibility": "Yes",
-  "createdAt": "2012-01-26T00:00:00.000Z",
-  "createdBy": "createdBy.bavq1@example.net",
-  "modifiedAt": "2002-12-14T00:00:00.000Z",
-  "modifiedBy": "modifiedBy.bavq1@example.org"
+  "ID": "11289600-4390-4dd4-a20f-92ba066f1521",
+  "Brand": "Brand-11289600",
+  "Location": "Location-11289600",
+  "MOD_Emp": "MOD_Emp-11289600",
+  "EmployeeName": "EmployeeName-11289600",
+  "DateofBusiness": "2014-12-25",
+  "LocationCode": "ocationCode-11289600",
+  "OrderDeliveredTotal": 21,
+  "CDMCashReceivedTotal": 10,
+  "CDMIncentiveCostTotal": 10,
+  "CDMCashDepositTotal": 72,
+  "Status": "Submitted",
+  "IncentiveRequestNo": 50,
+  "IncentiveDetailAss": [
+    {
+      "ID": "5735134f-ee75-477d-b6f9-dde974dfc561",
+      "EmpNo": {
+        "ID": "8445185d-88c0-4f49-8020-b906409f20a1"
+      },
+      "EmpName": "EmpName-5735134",
+      "GSEmp": "GSEmp-5735134",
+      "IncentiveType": "ncentiveType-5735134",
+      "OrderDelivered": 20,
+      "CDMCashReceived": 71,
+      "CDMIncentiveCost": 26429792.13,
+      "CDMCashDeposit": 52,
+      "createdAt": "2001-06-18T00:00:00.000Z",
+      "createdBy": "Merle.Gerlach@example.net",
+      "modifiedAt": "2008-05-11T00:00:00.000Z",
+      "modifiedBy": "Lilliana.Koepp91@example.org"
+    },
+    {
+      "ID": "5735135a-6ef3-4c49-a0c0-859b01769ab4",
+      "EmpNo": {
+        "ID": "8445185d-88c0-4f49-8020-b906409f20a1"
+      },
+      "EmpName": "EmpName-5735135",
+      "GSEmp": "GSEmp-5735135",
+      "IncentiveType": "ncentiveType-5735135",
+      "OrderDelivered": 91,
+      "CDMCashReceived": 48,
+      "CDMIncentiveCost": 10589844.29,
+      "CDMCashDeposit": 86,
+      "createdAt": "2017-06-26T00:00:00.000Z",
+      "createdBy": "Ashton.Simonis41@example.net",
+      "modifiedAt": "2004-01-19T00:00:00.000Z",
+      "modifiedBy": "Samara55@example.net"
+    }
+  ],
+  "IncentiveSummaryAss": [
+    {
+      "ID": "14345240-2528-4ceb-8417-c23deb6ce44f",
+      "IncentiveType": "centiveType-14345240",
+      "NoOfOrders": 83,
+      "Incentive": 2668535.14,
+      "createdAt": "2002-07-05T00:00:00.000Z",
+      "createdBy": "Ebba50@example.com",
+      "modifiedAt": "2019-06-27T00:00:00.000Z",
+      "modifiedBy": "Mortimer79@example.org"
+    },
+    {
+      "ID": "14345241-8615-4bb1-93cb-bd152dccb73a",
+      "IncentiveType": "centiveType-14345241",
+      "NoOfOrders": 73,
+      "Incentive": 4149874.15,
+      "createdAt": "2021-07-11T00:00:00.000Z",
+      "createdBy": "Mable.McGlynn@example.org",
+      "modifiedAt": "2020-12-25T00:00:00.000Z",
+      "modifiedBy": "Providenci_Lehner45@example.com"
+    }
+  ]
 }
 
 
-### IncentiveList
-# @name IncentiveList_DELETE
-DELETE {{server}}/odata/v4/incentive/IncentiveList/18983449-226c-46bf-9415-7ee941ec9d8f
+### IncentiveHeader
+# @name IncentiveHeader_DELETE
+DELETE {{server}}/odata/v4/incentive/IncentiveHeader/11289600-4390-4dd4-a20f-92ba066f1521
 Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+
+### IncentiveDetails
+# @name IncentiveDetails_GET
+GET {{server}}/odata/v4/incentive/IncentiveDetails
+Authorization: Basic {{username}} {{password}}
+
+
+### IncentiveDetails
+# @name IncentiveDetails_POST
+POST {{server}}/odata/v4/incentive/IncentiveDetails
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "ID": "5735134f-ee75-477d-b6f9-dde974dfc561",
+  "EmpNo": {
+    "ID": "8445185d-88c0-4f49-8020-b906409f20a1"
+  },
+  "EmpName": "EmpName-5735134",
+  "GSEmp": "GSEmp-5735134",
+  "IncentiveType": "ncentiveType-5735134",
+  "OrderDelivered": 20,
+  "CDMCashReceived": 71,
+  "CDMIncentiveCost": 26429792.13,
+  "CDMCashDeposit": 52,
+  "createdAt": "2001-06-18T00:00:00.000Z",
+  "createdBy": "Merle.Gerlach@example.net",
+  "modifiedAt": "2008-05-11T00:00:00.000Z",
+  "modifiedBy": "Lilliana.Koepp91@example.org"
+}
+
+
+### IncentiveDetails
+# @name IncentiveDetails_PATCH
+PATCH {{server}}/odata/v4/incentive/IncentiveDetails/5735134f-ee75-477d-b6f9-dde974dfc561
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "ID": "5735134f-ee75-477d-b6f9-dde974dfc561",
+  "EmpNo": {
+    "ID": "8445185d-88c0-4f49-8020-b906409f20a1"
+  },
+  "EmpName": "EmpName-5735134",
+  "GSEmp": "GSEmp-5735134",
+  "IncentiveType": "ncentiveType-5735134",
+  "OrderDelivered": 20,
+  "CDMCashReceived": 71,
+  "CDMIncentiveCost": 26429792.13,
+  "CDMCashDeposit": 52,
+  "createdAt": "2001-06-18T00:00:00.000Z",
+  "createdBy": "Merle.Gerlach@example.net",
+  "modifiedAt": "2008-05-11T00:00:00.000Z",
+  "modifiedBy": "Lilliana.Koepp91@example.org"
+}
+
+
+### IncentiveDetails
+# @name IncentiveDetails_DELETE
+DELETE {{server}}/odata/v4/incentive/IncentiveDetails/5735134f-ee75-477d-b6f9-dde974dfc561
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+
+### IncentiveSummary
+# @name IncentiveSummary_GET
+GET {{server}}/odata/v4/incentive/IncentiveSummary
+Authorization: Basic {{username}} {{password}}
+
+
+### IncentiveSummary
+# @name IncentiveSummary_POST
+POST {{server}}/odata/v4/incentive/IncentiveSummary
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "ID": "14345240-2528-4ceb-8417-c23deb6ce44f",
+  "IncentiveType": "centiveType-14345240",
+  "NoOfOrders": 83,
+  "Incentive": 2668535.14,
+  "createdAt": "2002-07-05T00:00:00.000Z",
+  "createdBy": "Ebba50@example.com",
+  "modifiedAt": "2019-06-27T00:00:00.000Z",
+  "modifiedBy": "Mortimer79@example.org"
+}
+
+
+### IncentiveSummary
+# @name IncentiveSummary_PATCH
+PATCH {{server}}/odata/v4/incentive/IncentiveSummary/14345240-2528-4ceb-8417-c23deb6ce44f
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "ID": "14345240-2528-4ceb-8417-c23deb6ce44f",
+  "IncentiveType": "centiveType-14345240",
+  "NoOfOrders": 83,
+  "Incentive": 2668535.14,
+  "createdAt": "2002-07-05T00:00:00.000Z",
+  "createdBy": "Ebba50@example.com",
+  "modifiedAt": "2019-06-27T00:00:00.000Z",
+  "modifiedBy": "Mortimer79@example.org"
+}
+
+
+### IncentiveSummary
+# @name IncentiveSummary_DELETE
+DELETE {{server}}/odata/v4/incentive/IncentiveSummary/14345240-2528-4ceb-8417-c23deb6ce44f
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+
+### EmployeeDetails
+# @name EmployeeDetails_GET
+GET {{server}}/odata/v4/incentive/EmployeeDetails
+Authorization: Basic {{username}} {{password}}
+
+
+### EmployeeDetails
+# @name EmployeeDetails_POST
+POST {{server}}/odata/v4/incentive/EmployeeDetails
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "ID": "8445185d-88c0-4f49-8020-b906409f20a1",
+  "Name": "Name-8445185",
+  "Email": "Email-8445185",
+  "Phone": "Phone-8445185",
+  "Address": "Address-8445185",
+  "DOB": "2022-12-31",
+  "DOJ": "2007-09-19",
+  "Status": "Resigned",
+  "Designation": "Manager",
+  "ManagerID": {
+    "ID": "8445185d-88c0-4f49-8020-b906409f20a1"
+  },
+  "createdAt": "2002-12-03T00:00:00.000Z",
+  "createdBy": "Ernesto.Rolfson@example.net",
+  "modifiedAt": "2010-03-17T00:00:00.000Z",
+  "modifiedBy": "Eliane1@example.net"
+}
+
+
+### EmployeeDetails
+# @name EmployeeDetails_PATCH
+PATCH {{server}}/odata/v4/incentive/EmployeeDetails/8445185d-88c0-4f49-8020-b906409f20a1
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "ID": "8445185d-88c0-4f49-8020-b906409f20a1",
+  "Name": "Name-8445185",
+  "Email": "Email-8445185",
+  "Phone": "Phone-8445185",
+  "Address": "Address-8445185",
+  "DOB": "2022-12-31",
+  "DOJ": "2007-09-19",
+  "Status": "Resigned",
+  "Designation": "Manager",
+  "ManagerID": {
+    "ID": "8445185d-88c0-4f49-8020-b906409f20a1"
+  },
+  "createdAt": "2002-12-03T00:00:00.000Z",
+  "createdBy": "Ernesto.Rolfson@example.net",
+  "modifiedAt": "2010-03-17T00:00:00.000Z",
+  "modifiedBy": "Eliane1@example.net"
+}
+
+
+### EmployeeDetails
+# @name EmployeeDetails_DELETE
+DELETE {{server}}/odata/v4/incentive/EmployeeDetails/8445185d-88c0-4f49-8020-b906409f20a1
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
