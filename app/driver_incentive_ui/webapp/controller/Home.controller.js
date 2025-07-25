@@ -88,43 +88,43 @@ sap.ui.define([
             const aCols = [];
 
             aCols.push({
-                property: "ID",
+                property: "header/ID",
                 label: "ID",
                 type: EdmType.String
             });
 
             aCols.push({
-                property: "date",
+                property: "header/DateofBusiness",
                 label: "Date",
                 type: EdmType.String
             });
 
             aCols.push({
-                property: "brand",
+                property: "header/Brand",
                 label: "Brand",
                 type: EdmType.String
             });
 
             aCols.push({
-                property: "locationCode",
+                property: "header/LocationCode",
                 label: "Location Code",
                 type: EdmType.String
             });
 
             aCols.push({
-                property: "location",
+                property: "header/Location",
                 label: "Location",
                 type: EdmType.String
             });
 
             aCols.push({
-                property: "driver",
+                property: "EmpNo_ID",
                 label: "Driver",
                 type: EdmType.String
             });
 
             aCols.push({
-                property: "incentive",
+                property: "IncentiveType",
                 label: "Incentive",
                 type: EdmType.Number,
                 scale: 2,
@@ -132,7 +132,7 @@ sap.ui.define([
             });
 
             aCols.push({
-                property: "orderCount",
+                property: "OrderDelivered",
                 label: "Order Count",
                 type: EdmType.Number,
                 scale: 0
@@ -146,7 +146,7 @@ sap.ui.define([
             });
 
             aCols.push({
-                property: "eligibility",
+                property: "Eligibility",
                 label: "Eligibility",
                 type: EdmType.String
             });

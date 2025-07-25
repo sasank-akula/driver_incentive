@@ -115,6 +115,11 @@
         "type": "sap.ui.model.json.JSONModel",
         "settings": {},
         "preload": false
+      }, 
+      "LocalModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {},
+        "preload": false
       }
     },
     "resources": {

@@ -1,4 +1,4 @@
-ID,createdAt,createdBy,modifiedAt,modifiedBy,EmpNo_ID,EmpName,GSEmp,IncentiveType,OrderDelivered,CDMCashReceived,CDMIncentiveCost,CDMCashDeposit,header_ID
-det001,,admin,,admin,emp001,John Doe,G123,KFG Driver 0.250,25,12000,2500.00,11500,head001
-det002,,admin,,admin,emp003,Robert Brown,G456,3rd Party 0.100,25,13000,2500.00,12500,head001
-det003,,admin,,admin,emp001,John Doe,G123,KFG Day Off 0.500,30,15000,3000.00,14000,head002
+ID,EmpNo_ID,EmpName,GSEmp,IncentiveType,OrderDelivered,CDMCashReceived,CDMIncentiveCost,CDMCashDeposit,header_ID
+det001,emp001,John Doe,G123,KFG Driver 0.250,25,12000,2500.00,11500,head001
+det002,emp003,Robert Brown,G456,3rd Party 0.100,25,13000,2500.00,12500,head001
+det003,emp001,John Doe,G123,KFG Day Off 0.500,30,15000,3000.00,14000,head002

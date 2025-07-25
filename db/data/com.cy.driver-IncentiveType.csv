@@ -1,7 +1,7 @@
-ID,Name,Text
-1,KFG Driver 0.250,KFG Driver 0.250
-2,PT Driver 0.150,PT Driver 0.150
-3,3rd Party 0.100,3rd Party 0.100
-4,KFG Files 0.125,KFG Files 0.125
-5,KFG Day Off 0.500,KFG Day Off 0.500
-6,Not Eligible 0.000,Not Eligible 0.000
+Name,Text
+KFG Driver 0.250,KFG Driver 0.250
+PT Driver 0.150,PT Driver 0.150
+3rd Party 0.100,3rd Party 0.100
+KFG Files 0.125,KFG Files 0.125
+KFG Day Off 0.500,KFG Day Off 0.500
+Not Eligible 0.000,Not Eligible 0.000

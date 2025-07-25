@@ -1,7 +1,9 @@
 sap.ui.define([
   "com/cy/driverincentiveui/controller/BaseController",
-  "sap/m/MessageBox"
-], (BaseController,MessageBox) => {
+  "sap/ui/core/BusyIndicator",
+  "sap/m/MessageBox",
+  "com/cy/driverincentiveui/controller/validator"
+], (BaseController,BusyIndicator, MessageBox,validator) => {
   "use strict";
   return BaseController.extend("com.cy.driverincentiveui.controller.IncentiveDetail", {
     onInit() {
@@ -17,12 +19,13 @@ sap.ui.define([
         var oDetail = await oContext.requestObject().then(function (oData) {
           return oData;
         })
+        this.getModel("LocalModel").setProperty("/enabled", oDetail.Status != "Draft" ? false : true);
         this.getModel("IncentiveHeaderModel").setData(oDetail)
 
         this.getModel("IncentiveItemModel").setProperty("/items", oDetail.IncentiveDetailAss);
-       
+
         this.getModel("IncentiveSummaryModel").setProperty("/items", oDetail.IncentiveSummaryAss);
-        
+
       } else {
         let aIncentives = ["KFG Driver 0.250", "PT Driver 0.150", "3rd Party 0.100", "KFG Files 0.125", "KFG Day Off 0.500", "Not Eligible 0.000"]
         let oIncentives = aIncentives.map((aIncentive) => {
@@ -80,6 +83,7 @@ sap.ui.define([
       let aIncentiveItem = oItemModel.getProperty("/items") || [];
       let aIncentives = oSummaryModel.getProperty("/items") || [];
 
+
       let totals = {
         totalOrderDelivered: 0,
         totalCdmCashReceived: 0,
@@ -120,7 +124,7 @@ sap.ui.define([
         totals.totalCdmIncentive += incentiveCost;
         totals.totalCdmCashDeposit += oItem.CDMCashDeposit;
       });
-   
+
       //summary model
       aIncentives.forEach(oSummary => {
         const config = incentiveConfig[oSummary.IncentiveType];
@@ -137,10 +141,10 @@ sap.ui.define([
       oItemModel.setProperty("/items", aIncentiveItem);
       oItemModel.updateBindings(true);
 
-      oHeaderModel.setProperty("/OrderDeliveredTotal",totals.totalOrderDelivered);
-      oHeaderModel.setProperty("/CDMCashReceivedTotal",totals.totalCdmCashReceived);
-      oHeaderModel.setProperty("/CDMIncentiveCostTotal",totals.totalCdmIncentive);
-      oHeaderModel.setProperty("/CDMCashDepositTotal",totals.totalCdmCashDeposit);
+      oHeaderModel.setProperty("/OrderDeliveredTotal", totals.totalOrderDelivered);
+      oHeaderModel.setProperty("/CDMCashReceivedTotal", parseFloat(totals.totalCdmCashReceived).toFixed(2));
+      oHeaderModel.setProperty("/CDMIncentiveCostTotal", parseFloat(totals.totalCdmIncentive).toFixed(2));
+      oHeaderModel.setProperty("/CDMCashDepositTotal", parseFloat(totals.totalCdmCashDeposit).toFixed(2));
       oHeaderModel.updateBindings(true);
       oSummaryModel.setProperty("/items", aIncentives);
       oSummaryModel.updateBindings(true);
@@ -153,28 +157,16 @@ sap.ui.define([
       this.getView().getModel("IncentiveItemModel").setProperty("/items", aIncentiveItem);
       this.getView().getModel("IncentiveItemModel").updateBindings(true);
     },
-    onSubmit: function () {
+    onSubmit: function (oEvent, oAction) {
+      debugger
       var headerModel = this.getModel("IncentiveHeaderModel").getData();
       var summary = this.getModel("IncentiveSummaryModel").getData().items
       var item = this.getModel("IncentiveItemModel").getData().items
       var oModel = this.getModel()
-      // for (var i = 0; i < item.length; i++) {
-      //   delete item[i].ID;
-      //   delete item[i].createdBy;
-      //   delete item[i].createdAt;
-      //   delete item[i].modifiedBy;
-      //   delete item[i].modifiedAt;
-      // }
-      // for (var i = 0; i < summary.length; i++) {
-      //   delete summary[i].ID;
-      //   delete summary[i].createdBy;
-      //   delete summary[i].createdAt;
-      //   delete summary[i].modifiedBy;
-      //   delete summary[i].modifiedAt;
-      // }
+      var ID = headerModel.IncentiveRequestNo
       var oBindings = oModel.bindList("/IncentiveHeader", null, [], [])
-     
-      var payload={
+
+      var oPayload = {
         "Brand": headerModel.Brand,
         "Location": headerModel.Location,
         "MOD_Emp": headerModel.MOD_Emp,
@@ -185,22 +177,74 @@ sap.ui.define([
         "CDMCashReceivedTotal": headerModel.CDMCashReceivedTotal,
         "CDMIncentiveCostTotal": headerModel.CDMIncentiveCostTotal,
         "CDMCashDepositTotal": headerModel.CDMCashDepositTotal,
-        "Status": "Submitted",
+        "Status": oAction === 'DRAFT' ? 'Draft' : "Submitted",
         "IncentiveRequestNo": "",
         "IncentiveDetailAss": item,
         "IncentiveSummaryAss": summary
       }
-      
-      var oResult = oBindings.create(payload)
 
-      oResult.created().then(() => {
-        let oResponse=oResult.getObject()
-        MessageBox.alert("Record created Successfully")
-        this.getModel("IncentiveHeaderModel").setProperty("/IncentiveRequestNo",oResponse.ID);
-        this.getModel("IncentiveHeaderModel").setProperty("/Status",oResponse.Status);
-        this.getView().getModel("IncentiveHeaderModel").updateBindings(true);
-        console.log(oResponse)
-      })
+      if (ID != 'NEW') {
+        console.log(validator.validateDraft(oPayload))
+        if(validator.validateDraft(oPayload)==="reject" && oAction==='DRAFT'){
+          MessageBox.warning("Add atleast one Incentive")
+          return
+        }
+        else if(validator.validateSubmit(oPayload)==="reject" && oAction==='SUBMIT'){
+          MessageBox.warning("Fill All Required Fields")
+          return
+        }
+        this.onCalculate();
+        var oSettings={
+          url: this.getBaseURL()+"/odata/v4/incentive/IncentiveHeader('"+ ID +"')",
+          method:"PUT",
+          contentType:"application/json",
+          data:JSON.stringify(oPayload) 
+        }
+        this.ajaxCall(oSettings).then(()=>{
+          BusyIndicator.hide();
+          if(oAction=="DRAFT"){
+            MessageBox.success("Record saved to draft")
+          }else{
+            MessageBox.success("Record Submitted")
+          }
+        }).catch(()=>{
+          MessageBox.error("Something went wrong")
+        })
+      } else {
+        console.log(validator.validateDraft(oPayload))
+        if(validator.validateDraft(oPayload)==="reject" && oAction==='DRAFT'){
+          MessageBox.warning("Add atleast one Incentive")
+          return
+        }
+        else if(validator.validateSubmit(oPayload)==="reject" && oAction==='SUBMIT'){
+          MessageBox.warning("Fill All Required Fields")
+          return
+        }
+        var oResult = oBindings.create(oPayload)
+        oResult.created().then(() => {
+          
+        this.onCalculate();
+          let oResponse = oResult.getObject()
+          MessageBox.alert("Record created Successfully")
+          this.getModel("IncentiveHeaderModel").setProperty("/IncentiveRequestNo", oResponse.ID);
+          this.getModel("IncentiveHeaderModel").setProperty("/Status", oResponse.Status);
+          this.getView().getModel("IncentiveHeaderModel").updateBindings(true);
+        })
+      }
+    },
+    onEmployeeSearch: function (oEvent) {
+      var empid = oEvent.getSource().getValue()
+      oEvent.getSource().getParent().getCells()[0].setValue(oEvent.getSource().getValue());
+
+      var sPath = "/EmployeeDetails('" + empid + "')";
+      var oContext = this.getModel().bindContext(sPath, undefined);
+      oContext.requestObject().
+        then(function (oData) {
+          oEvent.getSource().getParent().getCells()[1].setText(oData.Name);
+        })
+        .catch(() => {
+          MessageBox.warning("Enter Valid Employee ID");
+        });
     }
   });
 });

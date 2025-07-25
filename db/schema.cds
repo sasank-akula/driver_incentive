@@ -13,9 +13,9 @@ entity IncentiveHeader : cuid {
     DateofBusiness        : Date;
     LocationCode          : String(20);
     OrderDeliveredTotal   : Integer; 
-    CDMCashReceivedTotal  : Integer;
-    CDMIncentiveCostTotal : Integer;
-    CDMCashDepositTotal   : Integer;
+    CDMCashReceivedTotal  : Decimal(10, 2);
+    CDMIncentiveCostTotal : Decimal(10, 2);
+    CDMCashDepositTotal   : Decimal(10, 2);
     Status                : String enum {
         Draft;
         Submitted;
@@ -28,15 +28,15 @@ entity IncentiveHeader : cuid {
                                 on IncentiveSummaryAss.header = $self;
 }
 
-entity IncentiveDetails : cuid, managed {
+entity IncentiveDetails : cuid {
     EmpNo            : Association to EmployeeDetails;
     EmpName          : String(20);
     GSEmp            : String;
     IncentiveType    : String(20);
     OrderDelivered   : Integer;
-    CDMCashReceived  : Integer;
+    CDMCashReceived  : Decimal(10, 2);
     CDMIncentiveCost : Decimal(10, 2);
-    CDMCashDeposit   : Integer;
+    CDMCashDeposit   : Decimal(10, 2);
     header           : Association to IncentiveHeader;
 }
 
@@ -74,7 +74,7 @@ entity Location{
      key Name:String;
     Text:String;
 }
-entity IncentiveType : cuid {
+entity IncentiveType{
     key Name:String;
     Text:String;
 }

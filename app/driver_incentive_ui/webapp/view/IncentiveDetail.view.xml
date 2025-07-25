@@ -25,22 +25,24 @@
 				<subSections>
 					<ObjectPageSubSection id="_IDGenObjectPageSubSection">
 						<blocks>
-							<f:SimpleForm id="SimpleFormChange480_12120Dual" editable="true" layout="ColumnLayout">
+							<f:SimpleForm id="SimpleFormChange480_12120Dual"  layout="ColumnLayout">
 								<f:content>
-									<m:Label id="_IDGenLabel" text="{i18n>brand}" />
-									<m:ComboBox id="_IDGenComboBox5" selectedKey="{IncentiveHeaderModel>/Brand}" items="{ path:'/Brand', templateShareable:true}" >
+									<m:Label id="_IDGenLabel" text="{i18n>brand}"  />
+									<m:ComboBox id="_IDGenComboBox5" enabled="{LocalModel>/enabled}" required="true" selectedKey="{IncentiveHeaderModel>/Brand}" items="{ path:'/Brand', templateShareable:true}" >
 										<core:Item id="_IDGenItem5" key="{Name}" text="{Text}" />
 									</m:ComboBox>
 									<m:Label id="_IDGenLabel1" text="{i18n>modEmpNo}" />
-									<m:Input id="_IDGenInput1" value="{IncentiveHeaderModel>/MOD_Emp}" required="true" />
+									<m:Input id="_IDGenInput1" enabled="{LocalModel>/enabled}" value="{IncentiveHeaderModel>/MOD_Emp}" required="true" />
 									<m:Label id="_IDGenLabel2" text="{i18n>businessDate}" />
-									<m:DatePicker id="_IDGenDatePicker" required="true" value="{IncentiveHeaderModel>/DateofBusiness}" valueFormat="yyyy-MM-dd" placeholder="{i18n>enterDate}"  class="sapUiSmallMarginBottom" />
+									<m:DatePicker id="_IDGenDatePicker" enabled="{LocalModel>/enabled}" required="true" value="{IncentiveHeaderModel>/DateofBusiness}" valueFormat="yyyy-MM-dd" placeholder="{i18n>enterDate}"  class="sapUiSmallMarginBottom" />
 									<m:Label id="_IDGenLabel3" text="{i18n>location}" />
-									<m:Input id="_IDGenInput3" value="{IncentiveHeaderModel>/Location}" type="Url" required="true" />
+									<m:ComboBox id="_IDGenComboBox6" enabled="{LocalModel>/enabled}" required="true" selectedKey="{IncentiveHeaderModel>/Location}" items="{ path:'/Location', templateShareable:true}" >
+										<core:Item id="_IDGenItem6" key="{Name}" text="{Text}" />
+									</m:ComboBox>
 									<m:Label id="_IDGenLabel4" text="{i18n>employeeName}" />
-									<m:Input id="_IDGenInput4" value="{IncentiveHeaderModel>/EmployeeName}" type="Url" required="true" />
+									<m:Input id="_IDGenInput4" enabled="{LocalModel>/enabled}" value="{IncentiveHeaderModel>/EmployeeName}" type="Url" required="true" />
 									<m:Label id="_IDGenLabel5" text="{i18n>locationCode}" />
-									<m:Input id="_IDGenInput5" value="{IncentiveHeaderModel>/LocationCode}" required="true" />
+									<m:Input id="_IDGenInput5" enabled="{LocalModel>/enabled}" value="{IncentiveHeaderModel>/LocationCode}" required="true" />
 								</f:content>
 							</f:SimpleForm>
 						</blocks>
@@ -52,16 +54,16 @@
 				<subSections>
 					<ObjectPageSubSection id="personalSS1" title="{i18n>driverDetails}" titleUppercase="false">
 						<blocks>
-							<m:Table id="_IDGenTable1" items="{IncentiveItemModel>/items}">
+							<m:Table id="_IDGenTable1"  items="{IncentiveItemModel>/items}">
 								<m:headerToolbar>
 									<m:OverflowToolbar id="_IDGenOverflowToolbar">
 										<m:ToolbarSpacer id="_IDGenToolbarSpacer" />
-										<m:Button id="_IDGenButton2" text="{i18n>add}" icon="sap-icon://add" type="Accept" press=".onAddDriver" />
-										<m:Button id="_IDGenButton3" icon="sap-icon://simulate" type="Neutral" text="{i18n>calculate}" press=".onCalculate" />
+										<m:Button id="_IDGenButton2" text="{i18n>add}" enabled="{LocalModel>/enabled}" icon="sap-icon://add" type="Accept" press=".onAddDriver" />
+										<m:Button id="_IDGenButton3" enabled="{LocalModel>/enabled}" icon="sap-icon://simulate" type="Neutral" text="{i18n>calculate}" press=".onCalculate" />
 									</m:OverflowToolbar>
 								</m:headerToolbar>
 								<m:columns>
-									<m:Column id="_IDGenColumn" demandPopin="true" minScreenWidth="Tablet">
+									<m:Column id="_IDGenColumn"  demandPopin="true" minScreenWidth="Tablet" width="15%" >
 										<m:Label id="_IDGenLabel6" wrapping="true" text="{i18n>employeeNo}" required="true" />
 										<m:footer  ><m:Text id="_IDGenText1" text="{i18n>total}" /></m:footer>
 									</m:Column>
@@ -71,7 +73,7 @@
 									<m:Column id="_IDGenColumn2" demandPopin="true" minScreenWidth="Tablet">
 										<m:Label id="_IDGenLabel8" wrapping="true" text="{i18n>chipsyEmpNo}" required="true" />
 									</m:Column>
-									<m:Column id="_IDGenColumn3" demandPopin="true" minScreenWidth="Tablet">
+									<m:Column id="_IDGenColumn3" demandPopin="true" minScreenWidth="Tablet" width="15%">
 										<m:Label id="_IDGenLabel9" wrapping="true" text="{i18n>incentiveType}" required="true" />
 									</m:Column>
 									<m:Column id="_IDGenColumn4" demandPopin="true" minScreenWidth="Tablet">
@@ -95,21 +97,21 @@
 									</m:Column>
 								</m:columns>
 								<m:items>
-									<m:ColumnListItem id="_IDGenColumnListItem1">
+									<m:ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle" type="Inactive">
 										<m:cells>
-											<m:Input id="_IDGenInput6" value="{IncentiveItemModel>EmpNo_ID}" />
+											<m:Input id="_IDGenInput6" enabled="{LocalModel>/enabled}" value="{IncentiveItemModel>EmpNo_ID}"  valueHelpIconSrc="sap-icon://search" valueHelpRequest="onEmployeeSearch" showValueHelp="true"/>
 											<m:Text id="_IDGenText7" text="{IncentiveItemModel>EmpName}" />
-											<m:Input id="_IDGenInput7" value="{IncentiveItemModel>GSEmp}" />
-											<m:ComboBox id="_IDGenComboBox1" required="true" selectedKey="{IncentiveItemModel>IncentiveType}" items="{path: '/IncentiveType', templateShareable: true}">
+											<m:Input id="_IDGenInput7" enabled="{LocalModel>/enabled}" value="{IncentiveItemModel>GSEmp}" />
+											<m:ComboBox id="_IDGenComboBox1" enabled="{LocalModel>/enabled}" required="true" selectedKey="{IncentiveItemModel>IncentiveType}" items="{path: '/IncentiveType', templateShareable: true}">
 												<core:Item id="_IDGenItem" key="{Name}" text="{Text}" />
 											</m:ComboBox>
-											<m:Input id="_IDGenInput8" type="Number" value="{IncentiveItemModel>OrderDelivered}" required="true" />
-											<m:Input id="_IDGenInput9" type="Number" value="{IncentiveItemModel>CDMCashReceived}" required="true" />
-											<m:Input id="_IDGenInput10" type="Number" value="{IncentiveItemModel>CDMIncentiveCost}" required="true" editable="false" />
-											<m:Input id="_IDGenInput11" type="Number" value="{IncentiveItemModel>CDMCashDeposit}" required="true" editable="false" />
+											<m:Input id="_IDGenInput8" enabled="{LocalModel>/enabled}" type="Number" value="{IncentiveItemModel>OrderDelivered}" required="true" />
+											<m:Input id="_IDGenInput9" enabled="{LocalModel>/enabled}" type="Number" value="{IncentiveItemModel>CDMCashReceived}" required="true" />
+											<m:Input id="_IDGenInput10" enabled="{LocalModel>/enabled}" type="Number" value="{IncentiveItemModel>CDMIncentiveCost}" required="true" editable="false" />
+											<m:Input id="_IDGenInput11" enabled="{LocalModel>/enabled}" type="Number" value="{IncentiveItemModel>CDMCashDeposit}" required="true" editable="false" />
 											<m:HBox id="_IDGenHBox" gap="5%">
-												<m:Button id="_IDGenButton5" icon="sap-icon://edit" type="Accept" />
-												<m:Button id="_IDGenButton6" icon="sap-icon://decline" type="Reject" press=".onDeleteRow" />
+												<m:Button enabled="{LocalModel>/enabled}" id="_IDGenButton5" icon="sap-icon://edit" type="Accept" />
+												<m:Button enabled="{LocalModel>/enabled}" id="_IDGenButton6" icon="sap-icon://decline" type="Reject" press=".onDeleteRow" />
 											</m:HBox>
 										</m:cells>
 									</m:ColumnListItem>
@@ -154,11 +156,11 @@
 				</subSections>
 			</ObjectPageSection>
 		</sections>
-		<footer>
-			<m:OverflowToolbar id="_IDGenOverflowToolbar3" >
+		<footer >
+			<m:OverflowToolbar id="_IDGenOverflowToolbar3" visible="{LocalModel>/enabled}" >
 			<m:ToolbarSpacer id="_IDGenToolbarSpacer2"/>
-			<m:Button id="_IDGenButton8" press=".onSubmit" text="Submit" icon="sap-icon://save" type="Accept" />
-			<m:Button id="_IDGenButton9" text="Save as Draft" type="Emphasized" />
+			<m:Button id="_IDGenButton8" enabled="{LocalModel>/enabled}" press="onSubmit($event,'SUBMIT')" text="Submit" icon="sap-icon://save" type="Accept" />
+			<m:Button id="_IDGenButton9" enabled="{LocalModel>/enabled}" press="onSubmit($event,'DRAFT')" text="Save as Draft" type="Emphasized" />
 			</m:OverflowToolbar>
 		</footer>
 	</ObjectPageLayout>

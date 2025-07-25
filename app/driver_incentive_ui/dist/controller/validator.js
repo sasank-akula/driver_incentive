@@ -1,0 +1,2 @@
+sap.ui.define(["jquery.sap.global","sap/ui/core/Control"],function(jQuery,e){"use strict";return{validateDraft:function(e){if(e.IncentiveDetailAss.length===0){debugger;return"reject"}else{return"approve"}},validateSubmit:function(e){Object.entries(e).forEach(([e,t])=>{debugger})}}});
+//# sourceMappingURL=validator.js.map

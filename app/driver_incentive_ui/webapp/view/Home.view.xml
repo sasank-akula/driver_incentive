@@ -98,7 +98,7 @@
                             <Text id="_IDGenText29" text="{IncentiveType}" />
                             <Text id="_IDGenText30" text="{OrderDelivered}" />
                             <Text id="_IDGenText31" text="{}" />
-                            <Text id="_IDGenText32" text="No" />
+                            <Text id="_IDGenText32" text="{Eligibility}" />
                         </cells>
                     </ColumnListItem>
                 </items>
