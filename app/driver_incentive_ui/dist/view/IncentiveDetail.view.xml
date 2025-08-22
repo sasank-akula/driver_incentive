@@ -28,11 +28,11 @@
 							<f:SimpleForm id="SimpleFormChange480_12120Dual"  layout="ColumnLayout">
 								<f:content>
 									<m:Label id="_IDGenLabel" text="{i18n>brand}"  />
-									<m:ComboBox id="_IDGenComboBox5" enabled="{LocalModel>/enabled}" required="true" selectedKey="{IncentiveHeaderModel>/Brand}" items="{ path:'/Brand', templateShareable:true}" >
+									<m:ComboBox id="_IDGenComboBox5"  enabled="{LocalModel>/enabled}" required="true" selectedKey="{IncentiveHeaderModel>/Brand}" items="{ path:'/Brand', templateShareable:true}" >
 										<core:Item id="_IDGenItem5" key="{Name}" text="{Text}" />
 									</m:ComboBox>
-									<m:Label id="_IDGenLabel1" text="{i18n>modEmpNo}" />
-									<m:Input id="_IDGenInput1" enabled="{LocalModel>/enabled}" value="{IncentiveHeaderModel>/MOD_Emp}" required="true" />
+									<m:Label  id="_IDGenLabel1" text="{i18n>modEmpNo}" />
+									<m:Input valueState="" valueStateText="Enter a Value " id="_IDGenInput1" enabled="{LocalModel>/enabled}" value="{IncentiveHeaderModel>/MOD_Emp}" required="true" />
 									<m:Label id="_IDGenLabel2" text="{i18n>businessDate}" />
 									<m:DatePicker id="_IDGenDatePicker" enabled="{LocalModel>/enabled}" required="true" value="{IncentiveHeaderModel>/DateofBusiness}" valueFormat="yyyy-MM-dd" placeholder="{i18n>enterDate}"  class="sapUiSmallMarginBottom" />
 									<m:Label id="_IDGenLabel3" text="{i18n>location}" />

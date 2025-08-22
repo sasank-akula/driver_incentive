@@ -158,7 +158,6 @@ sap.ui.define([
       this.getView().getModel("IncentiveItemModel").updateBindings(true);
     },
     onSubmit: function (oEvent, oAction) {
-      debugger
       var headerModel = this.getModel("IncentiveHeaderModel").getData();
       var summary = this.getModel("IncentiveSummaryModel").getData().items
       var item = this.getModel("IncentiveItemModel").getData().items
@@ -178,7 +177,6 @@ sap.ui.define([
         "CDMIncentiveCostTotal": headerModel.CDMIncentiveCostTotal,
         "CDMCashDepositTotal": headerModel.CDMCashDepositTotal,
         "Status": oAction === 'DRAFT' ? 'Draft' : "Submitted",
-        "IncentiveRequestNo": "",
         "IncentiveDetailAss": item,
         "IncentiveSummaryAss": summary
       }
@@ -189,8 +187,8 @@ sap.ui.define([
           MessageBox.warning("Add atleast one Incentive")
           return
         }
-        else if(validator.validateSubmit(oPayload)==="reject" && oAction==='SUBMIT'){
-          MessageBox.warning("Fill All Required Fields")
+        else if(!validator.validateSubmit(oPayload) && oAction==='SUBMIT'){
+          MessageBox.warning("Please Fill Required Fields ")
           return
         }
         this.onCalculate();
@@ -216,7 +214,8 @@ sap.ui.define([
           MessageBox.warning("Add atleast one Incentive")
           return
         }
-        else if(validator.validateSubmit(oPayload)==="reject" && oAction==='SUBMIT'){
+        else if(!validator.validateSubmit(oPayload) && oAction==='SUBMIT'){
+          console.log(oPayload)
           MessageBox.warning("Fill All Required Fields")
           return
         }

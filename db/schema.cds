@@ -6,13 +6,13 @@ using {
 } from '@sap/cds/common';
 
 entity IncentiveHeader : cuid {
-    Brand                 : String(20) ;
+    Brand                 : String(20);
     Location              : String(20);
     MOD_Emp               : String(20);
     EmployeeName          : String(30);
     DateofBusiness        : Date;
     LocationCode          : String(20);
-    OrderDeliveredTotal   : Integer; 
+    OrderDeliveredTotal   : Integer;
     CDMCashReceivedTotal  : Decimal(10, 2);
     CDMIncentiveCostTotal : Decimal(10, 2);
     CDMCashDepositTotal   : Decimal(10, 2);
@@ -21,7 +21,10 @@ entity IncentiveHeader : cuid {
         Submitted;
         Approved;
     };
-    IncentiveRequestNo    : String;
+    Eligibility:String enum{
+        Yes;
+        No;
+    };
     IncentiveDetailAss    : Composition of many IncentiveDetails
                                 on IncentiveDetailAss.header = $self;
     IncentiveSummaryAss   : Composition of many IncentiveSummary
@@ -67,14 +70,16 @@ entity EmployeeDetails : cuid, managed {
 }
 
 entity Brand {
-    key Name:String;
-    Text:String;
+    key Name : String;
+        Text : String;
 }
-entity Location{
-     key Name:String;
-    Text:String;
+
+entity Location {
+    key Name : String;
+        Text : String;
 }
-entity IncentiveType{
-    key Name:String;
-    Text:String;
+
+entity IncentiveType {
+    key Name : String;
+        Text : String;
 }

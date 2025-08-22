@@ -75,6 +75,11 @@
         "sap.ui.core": {}
       }
     },
+    "commands": {
+			"FocusMessagePopover": {
+				"shortcut": "Ctrl+Shift+M"
+			}
+		},
     "contentDensities": {
       "compact": true,
       "cozy": true
@@ -101,6 +106,11 @@
         "preload": false
       },
       "IncentiveHeaderModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {},
+        "preload": false
+      },
+      "message": {
         "type": "sap.ui.model.json.JSONModel",
         "settings": {},
         "preload": false

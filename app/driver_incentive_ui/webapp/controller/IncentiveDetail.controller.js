@@ -1,15 +1,26 @@
 sap.ui.define([
   "com/cy/driverincentiveui/controller/BaseController",
   "sap/ui/core/BusyIndicator",
+  "sap/ui/core/library",
   "sap/m/MessageBox",
-  "com/cy/driverincentiveui/controller/validator"
-], (BaseController,BusyIndicator, MessageBox,validator) => {
+  'sap/m/MessagePopover',
+  'sap/m/MessageItem',
+  'sap/m/MessageToast',
+  "sap/ui/core/Messaging",
+  'sap/ui/core/message/Message',
+  'sap/ui/core/message/MessageType',
+  'sap/ui/core/Element',
+  "com/cy/driverincentiveui/controller/validator",
+  "sap/ui/core/Fragment"
+], (BaseController, BusyIndicator, library, MessageBox, MessagePopover, MessageItem, MessageToast, Messaging, MessageType, Elementvalidator, Fragment) => {
   "use strict";
   return BaseController.extend("com.cy.driverincentiveui.controller.IncentiveDetail", {
     onInit() {
       this.getRouter().getRoute("RouteDetail").attachPatternMatched(this._onRouteDriverIncentiveDetailMatched, this);
+
     },
     _onRouteDriverIncentiveDetailMatched: async function (oEvent) {
+      debugger
       var oArguments = oEvent.getParameter("arguments");
       this._oID = oArguments.ID;
       if (this._oID != "NEW") {
@@ -19,12 +30,19 @@ sap.ui.define([
         var oDetail = await oContext.requestObject().then(function (oData) {
           return oData;
         })
+        console.log(oDetail)
         this.getModel("LocalModel").setProperty("/enabled", oDetail.Status != "Draft" ? false : true);
         this.getModel("IncentiveHeaderModel").setData(oDetail)
 
         this.getModel("IncentiveItemModel").setProperty("/items", oDetail.IncentiveDetailAss);
 
         this.getModel("IncentiveSummaryModel").setProperty("/items", oDetail.IncentiveSummaryAss);
+
+        const oView = this.getView();
+        // set message model
+        oView.setModel(Messaging.getMessageModel(), "message");
+
+
 
       } else {
         let aIncentives = ["KFG Driver 0.250", "PT Driver 0.150", "3rd Party 0.100", "KFG Files 0.125", "KFG Day Off 0.500", "Not Eligible 0.000"]
@@ -37,9 +55,9 @@ sap.ui.define([
         })
         this.getModel("IncentiveSummaryModel").setProperty("/items", oIncentives);
         this.getModel("IncentiveItemModel").setProperty("/items", []);
-        this.getModel("IncentiveHeaderModel").setData({});
+        this.getModel("IncentiveHeaderModel").setData({ "ID": "NEW", "Status": "Draft" });
       }
-      this.getModel("IncentiveHeaderModel").setProperty("/IncentiveRequestNo", this._oID);
+      this.getModel("IncentiveHeaderModel").setProperty("/ID", this._oID);
       this.getView().getModel("IncentiveItemModel").updateBindings(true);
       this.getView().getModel("IncentiveHeaderModel").updateBindings(true);
       this.getView().getModel("IncentiveSummaryModel").updateBindings(true);
@@ -158,14 +176,28 @@ sap.ui.define([
       this.getView().getModel("IncentiveItemModel").updateBindings(true);
     },
     onSubmit: function (oEvent, oAction) {
-      debugger
       var headerModel = this.getModel("IncentiveHeaderModel").getData();
       var summary = this.getModel("IncentiveSummaryModel").getData().items
       var item = this.getModel("IncentiveItemModel").getData().items
       var oModel = this.getModel()
-      var ID = headerModel.IncentiveRequestNo
+      var ID = headerModel.ID
       var oBindings = oModel.bindList("/IncentiveHeader", null, [], [])
+      if (oAction !== 'Draft') {
+        if (validator.ValidateForm(this, 'IncentiveDetail')) {
+          MessageBox.error("Please fill in all required fields before submitting.");
+          return;
+        } else if (item.length === 0) {
+          MessageBox.error("Please add atleast one item before submitting.");
+          return;
+        }
+      }
+      else {
+        this.validateDetails("SimpleFormChange480_12120Dual")
+        this.validateDetails("_IDGenTable1")
+        return
+      }
 
+      this.onCalculate();
       var oPayload = {
         "Brand": headerModel.Brand,
         "Location": headerModel.Location,
@@ -177,56 +209,37 @@ sap.ui.define([
         "CDMCashReceivedTotal": headerModel.CDMCashReceivedTotal,
         "CDMIncentiveCostTotal": headerModel.CDMIncentiveCostTotal,
         "CDMCashDepositTotal": headerModel.CDMCashDepositTotal,
-        "Status": oAction === 'DRAFT' ? 'Draft' : "Submitted",
-        "IncentiveRequestNo": "",
+        "Status": oAction === 'Draft' ? 'Draft' : "Submitted",
+        "Eligibility": headerModel.Eligibility,
         "IncentiveDetailAss": item,
         "IncentiveSummaryAss": summary
       }
 
       if (ID != 'NEW') {
-        console.log(validator.validateDraft(oPayload))
-        if(validator.validateDraft(oPayload)==="reject" && oAction==='DRAFT'){
-          MessageBox.warning("Add atleast one Incentive")
-          return
+        var oSettings = {
+          // url: this.getBaseURL()+"/odata/v4/incentive/IncentiveHeader('"+ ID +"')",
+
+          url: "/odata/v4/incentive/IncentiveHeader('" + ID + "')",
+          method: "PUT",
+          contentType: "application/json",
+          data: JSON.stringify(oPayload)
         }
-        else if(validator.validateSubmit(oPayload)==="reject" && oAction==='SUBMIT'){
-          MessageBox.warning("Fill All Required Fields")
-          return
-        }
-        this.onCalculate();
-        var oSettings={
-          url: this.getBaseURL()+"/odata/v4/incentive/IncentiveHeader('"+ ID +"')",
-          method:"PUT",
-          contentType:"application/json",
-          data:JSON.stringify(oPayload) 
-        }
-        this.ajaxCall(oSettings).then(()=>{
+        this.ajaxCall(oSettings).then(() => {
           BusyIndicator.hide();
-          if(oAction=="DRAFT"){
+          if (oAction == "Draft") {
             MessageBox.success("Record saved to draft")
-          }else{
+          } else {
             MessageBox.success("Record Submitted")
           }
-        }).catch(()=>{
+        }).catch(() => {
           MessageBox.error("Something went wrong")
         })
       } else {
-        console.log(validator.validateDraft(oPayload))
-        if(validator.validateDraft(oPayload)==="reject" && oAction==='DRAFT'){
-          MessageBox.warning("Add atleast one Incentive")
-          return
-        }
-        else if(validator.validateSubmit(oPayload)==="reject" && oAction==='SUBMIT'){
-          MessageBox.warning("Fill All Required Fields")
-          return
-        }
         var oResult = oBindings.create(oPayload)
         oResult.created().then(() => {
-          
-        this.onCalculate();
           let oResponse = oResult.getObject()
           MessageBox.alert("Record created Successfully")
-          this.getModel("IncentiveHeaderModel").setProperty("/IncentiveRequestNo", oResponse.ID);
+          this.getModel("IncentiveHeaderModel").setProperty("/ID", oResponse.ID);
           this.getModel("IncentiveHeaderModel").setProperty("/Status", oResponse.Status);
           this.getView().getModel("IncentiveHeaderModel").updateBindings(true);
         })
@@ -245,6 +258,94 @@ sap.ui.define([
         .catch(() => {
           MessageBox.warning("Enter Valid Employee ID");
         });
+    },
+    onShowMessages: async function (oEvent) {
+      const oSourceControl = oEvent.getSource();
+      if (!this.oMessagePopover) {
+        this.oDialog ??= await this.loadFragment({
+          name: "com.cy.driverincentiveui.view.fragments.MessagePopOver",
+          controller: this
+        });
+      }
+      this.oDialog.openBy(oSourceControl);
+    },
+    validateDetails: function (sId) {
+      let oControl = (typeof sId === "object") ? sId : this.byId(sId);
+      let sType = oControl.getMetadata().getName();
+      sap.ui.getCore().getMessageManager().removeAllMessages();
+
+      if (sType === "sap.ui.layout.form.SimpleForm") {
+        let oFormElements = oControl.getContent();
+
+        for (let i = 0; i < oFormElements.length; i += 2) {
+          let oLabel = oFormElements[i].getText();
+          let oFieldInfo = oFormElements[i + 1];
+
+          if (oLabel !== "Insurance Required") {
+            let sValue = oFieldInfo.getValue?.() || oFieldInfo.getSelectedKey?.();
+
+            if (!sValue || sValue.trim() === "") {
+              Messaging.addMessages(new sap.ui.core.message.Message({
+                id: "Store Details",
+                message: oLabel + " is required",
+                type: sap.ui.core.MessageType.Error,
+                target: oFieldInfo.getId(),
+                processor: this.getOwnerComponent().getModel("IncentiveHeader")
+              }));
+              this.getView().getModel("message").updateBindings(true);
+
+              oFieldInfo.setValueState(sap.ui.core.ValueState.Error);
+              oFieldInfo.setValueStateText(oLabel + " is required");
+            } else {
+              oFieldInfo.setValueState(sap.ui.core.ValueState.None);
+              oFieldInfo.setValueStateText("");
+            }
+          }
+        }
+      }
+      else if (sType === "sap.m.Table") {
+        let aItems = oControl.getItems();
+
+        aItems.forEach((oItem, rowIndex) => {
+          let aCells = oItem.getCells();
+
+          aCells.forEach((oCell, colIndex) => {
+            let sValue = null;
+
+            // Editable fields
+            if (oCell instanceof sap.m.Input ||
+              oCell instanceof sap.m.ComboBox ||
+              oCell instanceof sap.m.DatePicker ||
+              oCell instanceof sap.m.Select) {
+              sValue = oCell.getValue?.() || oCell.getSelectedKey?.();
+            }
+            // Read-only text
+            else if (oCell instanceof sap.m.Text) {
+              sValue = oCell.getText();
+            }
+
+            if (sValue !== null && (!sValue || sValue.trim() === "")) {
+              Messaging.addMessages(new sap.ui.core.message.Message({
+                id: "Driver Details",
+                message: `Row ${rowIndex + 1}, Column ${colIndex + 1} is required`,
+                type: sap.ui.core.MessageType.Error,
+                target: oCell.getId(),
+                processor: this.getOwnerComponent().getModel("IncentiveHeader")
+              }));
+              
+
+              // Only editable cells show ValueState
+              if (oCell.setValueState) {
+                oCell.setValueState(sap.ui.core.ValueState.Error);
+                oCell.setValueStateText("This field is required");
+              }
+            } else if (oCell.setValueState) {
+              oCell.setValueState(sap.ui.core.ValueState.None);
+              oCell.setValueStateText("");
+            }
+          });
+        });
+      }
     }
   });
 });

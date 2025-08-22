@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <MessagePopover id="_IDGenMessagePopover"
+        items="{
+            path: 'message>/',
+            template: 'messageItemTemplate'
+        }"
+        groupItems="true"
+        activeTitlePress="onActivepress"
+        >
+        <MessageItem
+            id="messageItemTemplate"
+            type="{message>type}"
+            title="{message>message}"
+            groupName="{message>id}"
+            subtitle="{message>additionalText}"
+            description="{message>description}"
+            activeTitle="true"/>
+    </MessagePopover>
+</core:FragmentDefinition>

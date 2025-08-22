@@ -165,7 +165,10 @@ sap.ui.define([
             this.getOwnerComponent().getRouter().navTo("RouteDetail", {
                 ID: 'NEW'
             });
+            this.getModel("LocalModel").setProperty("/enabled", true);
         }
+        
+       
         
     });
 });
