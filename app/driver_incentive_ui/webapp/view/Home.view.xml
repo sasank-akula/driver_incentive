@@ -76,7 +76,7 @@
                     <Column id="_IDGenColumn18" minScreenWidth="Tablet" demandPopin="true">
                         <Text id="_IDGenText19" text="{i18n>columnIncentive}" />
                     </Column>
-                    <Column id="_IDGenColumn19" minScreenWidth="Tablet" demandPopin="true">
+                    <Column id="_IDGenColumn19" minScreenWidth="Tablet" hAlign="Center" demandPopin="true">
                         <Text id="_IDGenText20" text="{i18n>columnOrderCount}" />
                     </Column>
                     <Column id="_IDGenColumn20" minScreenWidth="Tablet" demandPopin="true">

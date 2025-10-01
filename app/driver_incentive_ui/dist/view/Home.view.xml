@@ -30,7 +30,7 @@
                                     <DateRangeSelection id="DRS1" class="DRS1" change="handleChange" />
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem id="_IDGenFilterGroupItem3" name="Eligibility" label="{i18n>filtergroupItemEligibilityLabel}" groupName="Group1" visibleInFilterBar="true">
+                            <fb:FilterGroupItem id="_IDGenFilterGroupItem3" name="header/Eligibility" label="{i18n>filtergroupItemEligibilityLabel}" groupName="Group1" visibleInFilterBar="true">
                                 <fb:control>
                                     <ComboBox id="_IDGenComboBox">
                                         <core:Item id="_IDGenItem1" key="yes" text="{i18n>yes}" />
@@ -48,7 +48,7 @@
             <Table id="idIncentiveTable" items="{path:'/IncentiveDetails', parameters:{$expand:'header'}}">
                 <headerToolbar>
                     <OverflowToolbar id="_IDGenOverflowToolbar1">
-                        <Title id="_IDGenTitle" text="Driver Incentive ({/IncentiveHeader/$count})" />
+                        <Title id="_IDGenTitle" text="Driver Incentive ({/IncentiveDetails/$count})" />
                         <ToolbarSpacer id="_IDGenToolbarSpacer1" />
                         <Button id="_IDGenButton4" text="{i18n>newDriverIncentive}" type="Accept" enabled="true" press=".onNewDriverIncentiveBtnPress"/>
                         <Button id="_IDGenButton7" icon="sap-icon://excel-attachment" type="Emphasized" press=".onExport" />
@@ -76,7 +76,7 @@
                     <Column id="_IDGenColumn18" minScreenWidth="Tablet" demandPopin="true">
                         <Text id="_IDGenText19" text="{i18n>columnIncentive}" />
                     </Column>
-                    <Column id="_IDGenColumn19" minScreenWidth="Tablet" demandPopin="true">
+                    <Column id="_IDGenColumn19" minScreenWidth="Tablet" hAlign="Center" demandPopin="true">
                         <Text id="_IDGenText20" text="{i18n>columnOrderCount}" />
                     </Column>
                     <Column id="_IDGenColumn20" minScreenWidth="Tablet" demandPopin="true">
@@ -87,8 +87,8 @@
                     </Column>
                 </columns>
                 <items>
-                    <ColumnListItem id="_IDGenColumnListItem2" vAlign="Middle" type="Navigation" press=".onItemSelect">
-                        <cells>
+                    <ColumnListItem highlight="{= ${header/Status} === 'Draft' ? 'Information' : 'None' }"  id="_IDGenColumnListItem2" vAlign="Middle" type="Navigation" press=".onItemSelect">
+                        <cells >
                             <Text id="_IDGenText23" text="{header/ID}" />
                             <Text id="_IDGenText24" text="{header/DateofBusiness}" />
                             <Text id="_IDGenText25" text="{header/Brand}" />
@@ -98,7 +98,7 @@
                             <Text id="_IDGenText29" text="{IncentiveType}" />
                             <Text id="_IDGenText30" text="{OrderDelivered}" />
                             <Text id="_IDGenText31" text="{}" />
-                            <Text id="_IDGenText32" text="{Eligibility}" />
+                            <Text id="_IDGenText32" text="{header/Eligibility}" />
                         </cells>
                     </ColumnListItem>
                 </items>

@@ -19,9 +19,12 @@ entity IncentiveHeader : cuid {
     Status                : String enum {
         Draft;
         Submitted;
-        Approved;
+        Approved_by_manager;
+        Approved_by_finance;
+        Rejected_by_manager;
+        Rejected_by_finance;
     };
-    Eligibility:String enum{
+    Eligibility           : String enum {
         Yes;
         No;
     };

@@ -2,6 +2,14 @@
   "welcomeFile": "/index.html",
   "authenticationMethod": "route",
   "routes": [
+    { 
+      "source": "^/workflow/(.*)$", 
+      "target": "/workflow/$1", 
+      "destination": "Sbpa",
+      "csrfProtection": false, 
+      "authenticationType": "none" 
+
+    },
     {
       "source": "^/odata/(.*)$",
       "target": "/odata/$1",

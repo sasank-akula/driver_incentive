@@ -102,33 +102,33 @@
       },
       "IncentiveItemModel": {
         "type": "sap.ui.model.json.JSONModel",
-        "settings": {},
+        "settings": {"defaultBindingMode": "TwoWay"},
         "preload": false
       },
       "IncentiveHeaderModel": {
         "type": "sap.ui.model.json.JSONModel",
-        "settings": {},
+        "settings": {"defaultBindingMode": "TwoWay"},
         "preload": false
       },
       "message": {
         "type": "sap.ui.model.json.JSONModel",
-        "settings": {},
+        "settings": {"defaultBindingMode": "TwoWay"},
         "preload": false
       },
       "IncentiveModel": {
         "type": "sap.ui.model.json.JSONModel",
         "uri": "model/incentiveModel.json",
-        "settings": {},
+        "settings": {"defaultBindingMode": "TwoWay"},
         "preload": false
       },
       "IncentiveSummaryModel": {
         "type": "sap.ui.model.json.JSONModel",
-        "settings": {},
+        "settings": {"defaultBindingMode": "TwoWay"},
         "preload": false
       }, 
       "LocalModel": {
         "type": "sap.ui.model.json.JSONModel",
-        "settings": {},
+        "settings": {"defaultBindingMode": "TwoWay"},
         "preload": false
       }
     },

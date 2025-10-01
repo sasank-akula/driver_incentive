@@ -31,25 +31,25 @@
 							<f:SimpleForm id="SimpleFormChange480_12120Dual" layout="ColumnLayout">
 								<f:content>
 									<m:Label id="_IDGenLabel" text="{i18n>brand}" />
-									<m:ComboBox id="_IDGenComboBox5" enabled="{LocalModel>/enabled}" fieldGroupIds="fgCombo" required="true" selectedKey="{IncentiveHeaderModel>/Brand}" items="{ path:'/Brand', templateShareable:true}">
+									<m:ComboBox id="_IDGenComboBox5" enabled="{LocalModel>/enabled}" fieldGroupIds="fgCombo" required="true" selectedKey="{IncentiveHeaderModel>/Brand}" change=".setValueStateNone" items="{ path:'/Brand', templateShareable:true}">
 										<core:Item id="_IDGenItem5" key="{Name}" text="{Text}" />
 									</m:ComboBox>
 									<m:Label id="_IDGenLabel1" text="{i18n>modEmpNo}" />
-									<m:Input id="_IDGenInput1" enabled="{LocalModel>/enabled}" fieldGroupIds="fgInput" value="{IncentiveHeaderModel>/MOD_Emp}" required="true" />
+									<m:Input id="_IDGenInput1" enabled="{LocalModel>/enabled}" fieldGroupIds="fgInput" value="{IncentiveHeaderModel>/MOD_Emp}" required="true" liveChange=".setValueStateNone"/>
 									<m:Label id="_IDGenLabel2" text="{i18n>businessDate}" />
-									<m:DatePicker id="_IDGenDatePicker" enabled="{LocalModel>/enabled}" fieldGroupIds="fgDate" required="true" value="{IncentiveHeaderModel>/DateofBusiness}" valueFormat="yyyy-MM-dd" placeholder="{i18n>enterDate}" class="sapUiSmallMarginBottom" />
+									<m:DatePicker id="_IDGenDatePicker" enabled="{LocalModel>/enabled}" fieldGroupIds="fgDate" required="true" value="{IncentiveHeaderModel>/DateofBusiness}" valueFormat="yyyy-MM-dd" placeholder="{i18n>enterDate}" change=".setValueStateNone" class="sapUiSmallMarginBottom" />
 									<m:Label id="_IDGenLabel3" text="{i18n>location}" />
-									<m:ComboBox id="_IDGenComboBox6" enabled="{LocalModel>/enabled}" fieldGroupIds="fgCombo" required="true" selectedKey="{IncentiveHeaderModel>/Location}" items="{ path:'/Location', templateShareable:true}">
+									<m:ComboBox id="_IDGenComboBox6" enabled="{LocalModel>/enabled}" fieldGroupIds="fgCombo" required="true" change=".setValueStateNone" selectedKey="{IncentiveHeaderModel>/Location}" items="{ path:'/Location', templateShareable:true}">
 										<core:Item id="_IDGenItem6" key="{Name}" text="{Text}" />
 									</m:ComboBox>
 									<m:Label id="_IDGenLabel4" text="{i18n>employeeName}" />
-									<m:Input id="_IDGenInput4" enabled="{LocalModel>/enabled}" fieldGroupIds="fgInput" value="{IncentiveHeaderModel>/EmployeeName}" type="Url" required="true" />
+									<m:Input id="_IDGenInput4" enabled="{LocalModel>/enabled}" fieldGroupIds="fgInput" liveChange=".setValueStateNone" value="{IncentiveHeaderModel>/EmployeeName}" type="Url" required="true" />
 									<m:Label id="_IDGenLabel5" text="{i18n>locationCode}" />
-									<m:Input id="_IDGenInput5" enabled="{LocalModel>/enabled}" fieldGroupIds="fgInput" value="{IncentiveHeaderModel>/LocationCode}" required="true" />
-									<m:Label id="_IDGenLabel19"  text="{i18n>filtergroupItemEligibilityLabel}" />
-									<m:ComboBox id="_IDGenComboBox3"  enabled="{LocalModel>/enabled}" fieldGroupIds="fgCombo" required="true" selectedKey="{IncentiveHeaderModel>/Eligibility}">
-										<core:Item id="_IDGenItem8"  key="Yes" text="{i18n>yes}" />
-                                        <core:Item id="_IDGenItem9"  key="No" text="{i18n>no}" />
+									<m:Input id="_IDGenInput5" enabled="{LocalModel>/enabled}" fieldGroupIds="fgInput" liveChange=".setValueStateNone" value="{IncentiveHeaderModel>/LocationCode}" required="true" />
+									<m:Label id="_IDGenLabel19" text="{i18n>filtergroupItemEligibilityLabel}" />
+									<m:ComboBox id="_IDGenComboBox3" enabled="{LocalModel>/enabled}" fieldGroupIds="fgCombo" change=".setValueStateNone" required="true" selectedKey="{IncentiveHeaderModel>/Eligibility}">
+										<core:Item id="_IDGenItem8" key="Yes" text="{i18n>yes}" />
+										<core:Item id="_IDGenItem9" key="No" text="{i18n>no}" />
 									</m:ComboBox>
 								</f:content>
 							</f:SimpleForm>
@@ -71,7 +71,7 @@
 									</m:OverflowToolbar>
 								</m:headerToolbar>
 								<m:columns>
-									<m:Column id="_IDGenColumn" demandPopin="true" minScreenWidth="Tablet" width="15%">
+									<m:Column id="_IDGenColumn"  demandPopin="true" minScreenWidth="Tablet" width="15%">
 										<m:Label id="_IDGenLabel6" wrapping="true" text="{i18n>employeeNo}" required="true" />
 										<m:footer  >
 											<m:Text id="_IDGenText1" text="{i18n>total}" />
@@ -117,16 +117,21 @@
 								<m:items>
 									<m:ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle" type="Inactive">
 										<m:cells>
-											<m:Input fieldGroupIds="fgInput" id="_IDGenInput6" enabled="{LocalModel>/enabled}" required="true" value="{IncentiveItemModel>EmpNo_ID}" valueHelpIconSrc="sap-icon://search" valueHelpRequest="onEmployeeSearch" showValueHelp="true"/>
-											<m:Text fieldGroupIds="fgText" id="_IDGenText7" text="{IncentiveItemModel>EmpName}" />
-											<m:Input fieldGroupIds="fgInput" id="_IDGenInput7" enabled="{LocalModel>/enabled}" value="{IncentiveItemModel>GSEmp}" />
-											<m:ComboBox fieldGroupIds="fgCombo" id="_IDGenComboBox1" enabled="{LocalModel>/enabled}" required="true" selectedKey="{IncentiveItemModel>IncentiveType}" items="{path: '/IncentiveType', templateShareable: true}">
+											
+											<m:Input fieldGroupIds="fgInput" showValueHelp="true" liveChange=".setValueStateNone" valueHelpRequest=".onEmployeeSearch" valueHelpIconSrc="sap-icon://search" value="{IncentiveItemModel>EmpNo_ID}" required="true" id="_IDGenInput6" enabled="{LocalModel>/enabled}" showSuggestion="true" placeholder="Employee ID" suggestionItems="{ path: '/EmployeeDetails' }" suggestionItemSelected=".onEmployeeSearch">
+												<m:suggestionItems>
+													<core:Item id="_IDGenItem58" key="{ID}"  text="{ID}"/>
+												</m:suggestionItems>
+											</m:Input>
+											<m:Text fieldGroupIds="fgText" id="_IDGenText7"  text="{IncentiveItemModel>EmpName}" />
+											<m:Input fieldGroupIds="fgInput" id="_IDGenInput7" liveChange=".setValueStateNone" enabled="{LocalModel>/enabled}" value="{IncentiveItemModel>GSEmp}" required="true"/>
+											<m:ComboBox fieldGroupIds="fgCombo" id="_IDGenComboBox1" change=".setValueStateNone" enabled="{LocalModel>/enabled}" required="true" selectedKey="{IncentiveItemModel>IncentiveType}" items="{path: '/IncentiveType', templateShareable: true}">
 												<core:Item id="_IDGenItem" key="{Name}" text="{Text}" />
 											</m:ComboBox>
-											<m:Input fieldGroupIds="fgInput" id="_IDGenInput8" enabled="{LocalModel>/enabled}" type="Number" value="{IncentiveItemModel>OrderDelivered}" required="true" />
-											<m:Input fieldGroupIds="fgInput" id="_IDGenInput9" enabled="{LocalModel>/enabled}" type="Number" value="{IncentiveItemModel>CDMCashReceived}" required="true" />
-											<m:Input fieldGroupIds="fgInput" id="_IDGenInput10" enabled="{LocalModel>/enabled}" type="Number" value="{IncentiveItemModel>CDMIncentiveCost}" required="true" editable="false" />
-											<m:Input fieldGroupIds="fgInput" id="_IDGenInput11" enabled="{LocalModel>/enabled}" type="Number" value="{IncentiveItemModel>CDMCashDeposit}" required="true" editable="false" />
+											<m:Input fieldGroupIds="fgInput" liveChange=".setValueStateNone" id="_IDGenInput8" enabled="{LocalModel>/enabled}" type="Number" value="{IncentiveItemModel>OrderDelivered}" required="true" />
+											<m:Input fieldGroupIds="fgInput" liveChange=".setValueStateNone" id="_IDGenInput9" enabled="{LocalModel>/enabled}" type="Number" value="{IncentiveItemModel>CDMCashReceived}" required="true" />
+											<m:Input fieldGroupIds="fgInput" liveChange=".setValueStateNone" id="_IDGenInput10" enabled="{LocalModel>/enabled}" type="Number" value="{IncentiveItemModel>CDMIncentiveCost}"  editable="false" />
+											<m:Input fieldGroupIds="fgInput" liveChange=".setValueStateNone" id="_IDGenInput11" enabled="{LocalModel>/enabled}" type="Number" value="{IncentiveItemModel>CDMCashDeposit}"  editable="false" />
 											<m:HBox id="_IDGenHBox" gap="5%">
 												<m:Button enabled="{LocalModel>/enabled}" id="_IDGenButton5" icon="sap-icon://edit" type="Accept" />
 												<m:Button enabled="{LocalModel>/enabled}" id="_IDGenButton6" icon="sap-icon://decline" type="Reject" press=".onDeleteRow" />
@@ -182,18 +187,11 @@
 		</sections>
 		<footer >
 			<m:OverflowToolbar id="_IDGenOverflowToolbar3" visible="{LocalModel>/enabled}">
-			 <m:Button
-                    id="messageButton"
-                    icon="sap-icon://message-popup"
-                    text="{message>/length}"
-                    type="Emphasized"
-                    press="onShowMessages"
-                    visible="{= ${message>/}.length > 0 }"
-                />
-				
+				<m:Button id="messageButton" icon="sap-icon://message-popup" text="{message>/length}" type="Emphasized" ariaHasPopup="Dialog" press=".onShowMessages" visible="{= ${message>/}.length > 0 }" />
+
 				<m:ToolbarSpacer id="_IDGenToolbarSpacer2"/>
-				<m:Button id="_IDGenButton8" enabled="{LocalModel>/enabled}" press="onSubmit($event,'SUBMIT')" text="Submit" icon="sap-icon://save" type="Accept" />
-				<m:Button id="_IDGenButton9" enabled="{LocalModel>/enabled}" press="onSubmit($event,'Draft')" text="Save as Draft" type="Emphasized" />
+				<m:Button id="_IDGenButton8" enabled="{LocalModel>/enabled}" press=".onSubmit($event,'SUBMIT')" text="Submit" icon="sap-icon://save" type="Accept" />
+				<m:Button id="_IDGenButton9" enabled="{LocalModel>/enabled}" press=".onSubmit($event,'Draft')" text="Save as Draft" type="Emphasized" />
 			</m:OverflowToolbar>
 		</footer>
 	</ObjectPageLayout>

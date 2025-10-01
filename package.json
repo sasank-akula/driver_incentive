@@ -1,49 +1,49 @@
 {
-  "name": "driver_incentive",
-  "version": "1.0.0",
-  "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
-  "license": "UNLICENSED",
-  "private": true,
-  "dependencies": {
-    "@cap-js/hana": "^1",
-    "@sap/cds": "^8",
-    "@sap/xssec": "^4",
-    "express": "^4"
-  },
-  "devDependencies": {
-    "@cap-js/cds-types": "^0.10.0",
-    "@cap-js/sqlite": "^1",
-    "@sap/cds-dk": "^8",
-    "cap-js-mockdata": "^0.0.3",
-    "cds-swagger-ui-express": "^0.10.0",
-    "mbt": "^1.2.29",
-    "rimraf": "^5.0.5"
-  },
-  "scripts": {
-    "start": "cds-serve",
-    "watch-driver_incentive_ui": "cds watch --open driver_incentive_ui/webapp/index.html?sap-ui-xx-viewCache=false",
-    "undeploy": "cf undeploy driver_incentive --delete-services --delete-service-keys --delete-service-brokers",
-    "build": "rimraf resources mta_archives && mbt build --mtar archive",
-    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
-  },
-  "cds": {
-    "requires": {
-      "db": {
-        "[development]": {
-          "kind": "sqlite"
-        },
-        "[production]": {
-          "kind": "hana"
-        }
-      },
-      "auth": "dummy",
-      "[production]": {
-        "auth": "xsuaa"
-      }
+    "name": "driver_incentive",
+    "version": "1.0.0",
+    "description": "A simple CAP project.",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@cap-js/hana": "^1",
+        "@sap/cds": "^8",
+        "@sap/xssec": "^4",
+        "express": "^4"
     },
-    "sql": {
-      "native_hana_associations": false
+    "devDependencies": {
+        "@cap-js/cds-types": "^0.10.0",
+        "@cap-js/sqlite": "^1",
+        "@sap/cds-dk": "^8",
+        "cap-js-mockdata": "^0.0.3",
+        "cds-swagger-ui-express": "^0.10.0",
+        "mbt": "^1.2.29",
+        "rimraf": "^5.0.5"
+    },
+    "scripts": {
+        "start": "cds-serve",
+        "watch-driver_incentive_ui": "cds watch --open driver_incentive_ui/webapp/index.html?sap-ui-xx-viewCache=false",
+        "undeploy": "cf undeploy driver_incentive --delete-services --delete-service-keys --delete-service-brokers",
+        "build": "rimraf resources mta_archives && mbt build --mtar archive",
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    },
+    "cds": {
+        "requires": {
+            "db": {
+                "[development]": {
+                    "kind": "sqlite"
+                },
+                "[production]": {
+                    "kind": "hana"
+                }
+            },
+            "auth": "dummy",
+            "[production]": {
+                "auth": "xsuaa"
+            }
+        },
+        "sql": {
+            "native_hana_associations": false
+        }
     }
-  }
 }
