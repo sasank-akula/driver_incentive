@@ -30,8 +30,12 @@ sap.ui.define([
         var oDetail = await oContext.requestObject().then(function (oData) {
           return oData;
         })
-        console.log(oDetail)
-        this.getModel("LocalModel").setProperty("/enabled", oDetail.Status != "Draft" ? false : true);
+        let status = oDetail.Status;
+        if (status === "Draft" || status.startsWith("Rejected")) {
+          this.getModel("LocalModel").setProperty("/enabled", true);
+        } else {
+          this.getModel("LocalModel").setProperty("/enabled", false);
+        }
         this.getModel("IncentiveHeaderModel").setData(oDetail)
         this.getModel("IncentiveItemModel").setProperty("/items", oDetail.IncentiveDetailAss);
         this.getModel("IncentiveSummaryModel").setProperty("/items", oDetail.IncentiveSummaryAss);
@@ -109,77 +113,79 @@ sap.ui.define([
       this.getView().getModel("IncentiveItemModel").setProperty("/items", aIncentiveItem);
     },
     onCalculate: async function () {
-      const oItemModel = this.getModel("IncentiveItemModel");
-      const oSummaryModel = this.getModel("IncentiveSummaryModel");
-      const oHeaderModel = this.getModel("IncentiveHeaderModel");
+  const oItemModel = this.getModel("IncentiveItemModel");
+  const oSummaryModel = this.getModel("IncentiveSummaryModel");
+  const oHeaderModel = this.getModel("IncentiveHeaderModel");
 
-      let aIncentiveItem = oItemModel.getProperty("/items") || [];
-      let aIncentives = oSummaryModel.getProperty("/items") || [];
+  let aIncentiveItem = oItemModel.getProperty("/items") || [];
+  let aIncentives = oSummaryModel.getProperty("/items") || [];
 
+  let totals = {
+    totalOrderDelivered: 0,
+    totalCdmCashReceived: 0,
+    totalCdmIncentive: 0,
+    totalCdmCashDeposit: 0
+  };
 
-      let totals = {
-        totalOrderDelivered: 0,
-        totalCdmCashReceived: 0,
-        totalCdmIncentive: 0,
-        totalCdmCashDeposit: 0
-      };
+  const incentiveConfig = {
+    "KFG Driver 0.250": { rate: 0.250, key: "KFG_025" },
+    "PT Driver 0.150": { rate: 0.150, key: "PT_015" },
+    "3rd Party 0.100": { rate: 0.100, key: "TP_010" },
+    "KFG Files 0.125": { rate: 0.125, key: "FILES_0125" },
+    "KFG Day Off 0.500": { rate: 0.500, key: "DAYOFF_0500" },
+    "Not Eligible 0.000": { rate: 0.000, key: "NE_000" }
+  };
 
-      const incentiveConfig = {
-        "KFG Driver 0.250": { rate: 0.250, key: "KFG_025" },
-        "PT Driver 0.150": { rate: 0.150, key: "PT_015" },
-        "3rd Party 0.100": { rate: 0.100, key: "TP_010" },
-        "KFG Files 0.125": { rate: 0.125, key: "FILES_0125" },
-        "KFG Day Off 0.500": { rate: 0.500, key: "DAYOFF_0500" },
-        "Not Eligible 0.000": { rate: 0.000, key: "NE_000" }
-      };
+  let orderCounts = {
+    KFG_025: 0, PT_015: 0, TP_010: 0,
+    FILES_0125: 0, DAYOFF_0500: 0, NE_000: 0
+  };
 
-      let orderCounts = {
-        KFG_025: 0, PT_015: 0, TP_010: 0,
-        FILES_0125: 0, DAYOFF_0500: 0, NE_000: 0
-      };
+  aIncentiveItem.forEach(oItem => {
+    const config = incentiveConfig[oItem.IncentiveType];
+    const orderDelivered = Number(oItem.OrderDelivered || 0);
+    const cashReceived = Number(oItem.CDMCashReceived || 0);
+    let incentiveCost = 0;
 
-      aIncentiveItem.forEach(oItem => {
-        const config = incentiveConfig[oItem.IncentiveType];
-        const orderDelivered = Number(oItem.OrderDelivered || 0);
-        const cashReceived = Number(oItem.CDMCashReceived || 0);
-        let incentiveCost = 0;
+    if (config) {
+      incentiveCost = orderDelivered * config.rate;
+      orderCounts[config.key] += orderDelivered;
+    }
 
-        if (config) {
-          incentiveCost = Number((orderDelivered * config.rate).toFixed(2));
-          orderCounts[config.key] += orderDelivered;
-        }
+    // Keep OrderDelivered as integer, others with 2 decimals
+    oItem.CDMIncentiveCost = incentiveCost.toFixed(2);
+    oItem.CDMCashDeposit = (incentiveCost + cashReceived).toFixed(2);
 
-        oItem.CDMIncentiveCost = incentiveCost;
-        oItem.CDMCashDeposit = incentiveCost + cashReceived;
-        //header model
-        totals.totalOrderDelivered += orderDelivered;
-        totals.totalCdmCashReceived += cashReceived;
-        totals.totalCdmIncentive += incentiveCost;
-        totals.totalCdmCashDeposit += oItem.CDMCashDeposit;
-      });
+    totals.totalOrderDelivered += orderDelivered;
+    totals.totalCdmCashReceived += cashReceived;
+    totals.totalCdmIncentive += incentiveCost;
+    totals.totalCdmCashDeposit += (incentiveCost + cashReceived);
+  });
 
-      //summary model
-      aIncentives.forEach(oSummary => {
-        const config = incentiveConfig[oSummary.IncentiveType];
-        if (config) {
-          oSummary.NoOfOrders = orderCounts[config.key];
-          if (config.rate > 0) {
-            oSummary.Incentive = Number((orderCounts[config.key] * config.rate).toFixed(2));
-          }
-        }
+  // summary model
+  aIncentives.forEach(oSummary => {
+    const config = incentiveConfig[oSummary.IncentiveType];
+    if (config) {
+      oSummary.NoOfOrders = orderCounts[config.key];
+      if (config.rate > 0) {
+        oSummary.Incentive = (orderCounts[config.key] * config.rate).toFixed(2);
+      } else {
+        oSummary.Incentive = "0.00";
+      }
+    }
+  });
 
-      });
+  // update models
+  oItemModel.setProperty("/items", aIncentiveItem);
+  oSummaryModel.setProperty("/items", aIncentives);
 
-
-      oItemModel.setProperty("/items", aIncentiveItem);
-
-      oHeaderModel.setProperty("/OrderDeliveredTotal", totals.totalOrderDelivered);
-      oHeaderModel.setProperty("/CDMCashReceivedTotal", parseFloat(totals.totalCdmCashReceived).toFixed(2));
-      oHeaderModel.setProperty("/CDMIncentiveCostTotal", parseFloat(totals.totalCdmIncentive).toFixed(2));
-      oHeaderModel.setProperty("/CDMCashDepositTotal", parseFloat(totals.totalCdmCashDeposit).toFixed(2));
-      oSummaryModel.setProperty("/items", aIncentives);
-
-    },
+  // Apply formatting at the end
+  oHeaderModel.setProperty("/OrderDeliveredTotal", totals.totalOrderDelivered); // integer
+  oHeaderModel.setProperty("/CDMCashReceivedTotal", totals.totalCdmCashReceived.toFixed(2));
+  oHeaderModel.setProperty("/CDMIncentiveCostTotal", totals.totalCdmIncentive.toFixed(2));
+  oHeaderModel.setProperty("/CDMCashDepositTotal", totals.totalCdmCashDeposit.toFixed(2));
+}
+,
     onDeleteRow: function (oEvent) {
       let aIncentiveItem = this.getModel("IncentiveItemModel").getProperty("/items") || [];
       let sPath = oEvent.getSource().getBindingContext("IncentiveItemModel").getPath()
@@ -220,14 +226,14 @@ sap.ui.define([
 
         if (ID != 'NEW') {
           var oSettings = {
-            url: this.getBaseURL()+"/odata/v4/incentive/IncentiveHeader('"+ ID +"')",
+            url: this.getBaseURL() + "/odata/v4/incentive/IncentiveHeader('" + ID + "')",
 
             // url: "/odata/v4/incentive/IncentiveHeader('" + ID + "')",
             method: "PUT",
             contentType: "application/json",
             data: JSON.stringify(oPayload)
           }
-          this.ajaxCall(oSettings).then((oResponse,oType) => {
+          this.ajaxCall(oSettings).then((oResponse, oType) => {
             BusyIndicator.hide();
             if (oAction == "Draft") {
               MessageBox.success("Record saved to draft")
@@ -273,7 +279,7 @@ sap.ui.define([
       const appModPath = jQuery.sap.getModulePath(appPath);
       const wfUrl = "/workflow/rest/v1/workflow-instances";
       $.ajax({
-        url: appModPath+wfUrl,
+        url: appModPath + wfUrl,
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify(payload),
@@ -416,6 +422,7 @@ sap.ui.define([
         oControl.setValueState("None");
       }
     }
+
 
 
   });

@@ -188,7 +188,6 @@
 		<footer >
 			<m:OverflowToolbar id="_IDGenOverflowToolbar3" visible="{LocalModel>/enabled}">
 				<m:Button id="messageButton" icon="sap-icon://message-popup" text="{message>/length}" type="Emphasized" ariaHasPopup="Dialog" press=".onShowMessages" visible="{= ${message>/}.length > 0 }" />
-
 				<m:ToolbarSpacer id="_IDGenToolbarSpacer2"/>
 				<m:Button id="_IDGenButton8" enabled="{LocalModel>/enabled}" press=".onSubmit($event,'SUBMIT')" text="Submit" icon="sap-icon://save" type="Accept" />
 				<m:Button id="_IDGenButton9" enabled="{LocalModel>/enabled}" press=".onSubmit($event,'Draft')" text="Save as Draft" type="Emphasized" />

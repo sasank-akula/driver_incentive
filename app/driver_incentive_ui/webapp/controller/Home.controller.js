@@ -49,6 +49,17 @@ sap.ui.define([
             // })]
             oBinding.filter(aFilters);
         },
+        formatHighlight: function (sStatus) {
+            debugger
+            if (!sStatus) return "None";
+
+            if (sStatus === "Draft") return "Information";
+            if (sStatus === "Submitted") return "Warning";
+            if (sStatus.startsWith("Approved")) return "Success";
+            if (sStatus.startsWith("Rejected")) return "Error";
+
+            return "None";
+        },
 
         formatDate: function (date) {
             var month = '' + (date.getMonth() + 1);
@@ -60,7 +71,7 @@ sap.ui.define([
 
             return [year, month, day].join('-');
         },
-        
+
         onExport: function () {
             if (!this._oTable) {
                 this._oTable = this.byId("idIncentiveTable");
@@ -167,8 +178,8 @@ sap.ui.define([
             });
             this.getModel("LocalModel").setProperty("/enabled", true);
         }
-        
-       
-        
+
+
+
     });
 });

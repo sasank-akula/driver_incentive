@@ -1,3 +1,5 @@
 ID,Brand,Location,MOD_Emp,EmployeeName,DateofBusiness,LocationCode,OrderDeliveredTotal,CDMCashReceivedTotal,CDMIncentiveCostTotal,CDMCashDepositTotal,Status,Eligibility
 head001,Nike,Hyderabad,emp002,Alice Smith,2025-07-01,HYD001,50,25000,5000,24000,Submitted,Yes
 head002,Adidas,Bangalore,emp002,Alice Smith,2025-07-01,BLR001,30,15000,3000,14000,Draft,Yes
+head003,Reebok,Chennai,emp007,David Martinez,2025-07-02,CHN001,57,28500,5700,27300,Approved_by_manager,Yes
+head004,Puma,Delhi,emp007,David Martinez,2025-07-02,DEL001,26,13000,2600,12400,Approved_by_finance,Yes

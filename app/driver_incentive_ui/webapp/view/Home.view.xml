@@ -12,17 +12,17 @@
                         <fb:filterGroupItems>
                             <fb:FilterGroupItem id="_IDGenFilterGroupItem" name="header/Brand" label="{i18n>filtergroupItemBrandLable}" groupName="Group1" visibleInFilterBar="true">
                                 <fb:control>
-                                    <ComboBox id="_IDGenComboBox2" placeholder="{i18n>filtergroupItemBrandPlaceholder}" items="{ path: '/Brand' }" >
+                                    <ComboBox id="_IDGenComboBox2" placeholder="{i18n>filtergroupItemBrandPlaceholder}" items="{ path: '/Brand' }">
                                         <core:Item id="_IDGenItem3" key="{Name}" text="{Text}" />
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="_IDGenFilterGroupItem1" name="header/Location" label="{i18n>filtergroupItemLocationLable}" groupName="Group1" visibleInFilterBar="true">
                                 <fb:control>
-                                <ComboBox id="_IDGenComboBox4"  placeholder="{i18n>filtergroupItemLoactionPlaceholder}" items="{ path:'/Location' }">
+                                    <ComboBox id="_IDGenComboBox4" placeholder="{i18n>filtergroupItemLoactionPlaceholder}" items="{ path:'/Location' }">
                                         <core:Item id="_IDGenItem4" key="{Name}" text="{Text}"/>
-                                </ComboBox>
-                                    
+                                    </ComboBox>
+
                                 </fb:control>
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="_IDGenFilterGroupItem2" name="header/DateofBusiness" label="{i18n>filtergroupItemDateLabel}" groupName="Group1" visibleInFilterBar="true">
@@ -87,7 +87,9 @@
                     </Column>
                 </columns>
                 <items>
-                    <ColumnListItem highlight="{= ${header/Status} === 'Draft' ? 'Information' : 'None' }"  id="_IDGenColumnListItem2" vAlign="Middle" type="Navigation" press=".onItemSelect">
+                    <ColumnListItem highlight="{ path: 'header/Status', formatter: '.formatHighlight' }"
+
+ id="_IDGenColumnListItem2" vAlign="Middle" type="Navigation" press=".onItemSelect">
                         <cells >
                             <Text id="_IDGenText23" text="{header/ID}" />
                             <Text id="_IDGenText24" text="{header/DateofBusiness}" />

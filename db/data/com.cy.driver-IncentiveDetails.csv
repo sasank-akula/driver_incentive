@@ -2,3 +2,7 @@ ID,EmpNo_ID,EmpName,GSEmp,IncentiveType,OrderDelivered,CDMCashReceived,CDMIncent
 det001,emp001,John Doe,G123,KFG Driver 0.250,25,12000,2500.00,11500,head001
 det002,emp003,Robert Brown,G456,3rd Party 0.100,25,13000,2500.00,12500,head001
 det003,emp001,John Doe,G123,KFG Day Off 0.500,30,15000,3000.00,14000,head002
+det004,emp004,Emily Johnson,G789,KFG Driver 0.250,28,14000,2800.00,13200,head002
+det005,emp005,Michael Davis,G101,3rd Party 0.100,22,11000,2200.00,10800,head003
+det006,emp006,Jessica Wilson,G112,KFG Day Off 0.500,35,17500,3500.00,16500,head003
+det007,emp008,Sarah Anderson,G131,KFG Driver 0.250,26,13000,2600.00,12400,head004

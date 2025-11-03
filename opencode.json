@@ -1,0 +1,9 @@
+{
+  "mcp": {
+    "cds-mcp": {
+      "type": "local",
+      "command": ["npx", "-y", "@cap-js/mcp-server"],
+      "enabled": true
+    }
+  }
+}
