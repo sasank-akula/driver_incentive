@@ -1,11 +1,21 @@
 {
-      "mcpServers": {
+  "mcpServers": {
     "cds-mcp": {
       "command": "cds-mcp",
       "args": [],
       "env": {}
     }
   },
-    "SAP HANA Database Explorer.ShowXsAdvancedConnections": true,
-    "SAP HANA Project Explorer.bind.confirm automatic undeployment": false
+  "SAP HANA Database Explorer.ShowXsAdvancedConnections": true,
+  "SAP HANA Project Explorer.bind.confirm automatic undeployment": false,
+  "eslint.validate": [
+    "cds",
+    "csn",
+    "csv",
+    "csv (semicolon)",
+    "tsv",
+    "tab",
+    "javascript",
+    "typescript"
+  ]
 }

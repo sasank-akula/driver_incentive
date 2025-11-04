@@ -19,14 +19,16 @@
         "cap-js-mockdata": "^0.0.3",
         "cds-swagger-ui-express": "^0.10.0",
         "mbt": "^1.2.29",
-        "rimraf": "^5.0.5"
+        "rimraf": "^5.0.5",
+        "@cap-js/cds-test": "^0"
     },
     "scripts": {
         "start": "cds-serve",
         "watch-driver_incentive_ui": "cds watch --open driver_incentive_ui/webapp/index.html?sap-ui-xx-viewCache=false",
         "undeploy": "cf undeploy driver_incentive --delete-services --delete-service-keys --delete-service-brokers",
         "build": "rimraf resources mta_archives && mbt build --mtar archive",
-        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+        "test": "node --test"
     },
     "cds": {
         "requires": {
