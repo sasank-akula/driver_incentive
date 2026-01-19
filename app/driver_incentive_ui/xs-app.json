@@ -2,18 +2,10 @@
   "welcomeFile": "/index.html",
   "authenticationMethod": "route",
   "routes": [
-    { 
-      "source": "^/workflow/(.*)$", 
-      "target": "/workflow/$1", 
-      "destination": "Sbpa",
-      "csrfProtection": false, 
-      "authenticationType": "none" 
-
-    },
     {
       "source": "^/odata/(.*)$",
       "target": "/odata/$1",
-      "destination": "driver_incentive-srv-api",
+      "destination": "srv-api",
       "authenticationType": "xsuaa",
       "csrfProtection": false
     },

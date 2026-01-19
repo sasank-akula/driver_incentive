@@ -19,6 +19,19 @@ sap.ui.define([
             // set the device model
             this.setModel(models.createDeviceModel(), "device");
 
+            this.setModel(new sap.ui.model.json.JSONModel({
+                hasMeeting: false,
+                meetingUrl: null,
+                showHelp: true, 
+                pip: {
+                    left: "70%",
+                    top: "60%"
+                }
+            }), "cvi");
+
+
+            this._callFrame = null;
+
             // enable routing
             this.getRouter().initialize();
         }

@@ -1,13 +1,23 @@
-<mvc:View controllerName="com.cy.driverincentiveui.controller.App"
-    displayBlock="true"
-    xmlns:mvc="sap.ui.core.mvc"
-	xmlns:f="sap.f"
-    xmlns="sap.m">
-    <App id="app">
-		<f:FlexibleColumnLayout
-			id="layout"
-			layout="{appView>/layout}"
-			backgroundDesign="Translucent">
-		</f:FlexibleColumnLayout>
-    </App>
+<mvc:View controllerName="com.cy.driverincentiveui.controller.App" displayBlock="true"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:f="sap.f"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <App id="app">
+    <f:FlexibleColumnLayout id="layout" layout="{appView>/layout}" backgroundDesign="Translucent">
+    </f:FlexibleColumnLayout>
+  </App>
+  
+  <Button id="helpFab" icon="sap-icon://video" type="Transparent" visible="{cvi>/showHelp}" tooltip="Click to get help and guidance" class="helpFab transparentHover" press=".onNeedHelp"/>
+  <VBox id="globalCallContainer" visible="{cvi>/hasMeeting}" class="pipContainer">
+    <customData>
+      <core:CustomData id="_IDGenCustomData1" key="pipLeft" value="{cvi>/pip/left}" writeToDom="true"/>
+      <core:CustomData id="_IDGenCustomData2" key="pipTop" value="{cvi>/pip/top}" writeToDom="true"/>
+    </customData>
+    <HBox id="pipHeader" class="pipHeader" justifyContent="SpaceBetween">
+      <Text id="_IDGenText33" text="Video Assistant" textAlign="Left" class="sapThemeMediumText sapUiTinyMargin pipHeaderText"/>
+      <Button id="_IDGenButton10" icon="sap-icon://decline" type="Transparent" press=".onEndCall"/>
+    </HBox>
+    <VBox id="dailyHost" class="pipContent"/>
+  </VBox>
 </mvc:View>

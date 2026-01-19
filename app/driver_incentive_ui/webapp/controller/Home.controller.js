@@ -12,7 +12,16 @@ sap.ui.define([
         onInit() {
             this.getRouter().getRoute("RouteHome").attachPatternMatched(this._onRouteDriverIncentiveHomeMatched, this);
         },
-        _onRouteDriverIncentiveHomeMatched: function () {
+        _onRouteDriverIncentiveHomeMatched:async function () {
+           var oModel= this.getOwnerComponent().getModel();
+           try {
+                const oAction = oModel.bindContext("/EmployeeDetail(...)")
+                await oAction.execute()
+                var oContext = oAction.getBoundContext().getObject();
+                console.log(oContext.value)
+            } catch (error) {
+                console.error("Error ", error)
+            }
         },
         onSearch: function () {
             var that = this

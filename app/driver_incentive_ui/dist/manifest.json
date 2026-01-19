@@ -76,10 +76,10 @@
       }
     },
     "commands": {
-			"FocusMessagePopover": {
-				"shortcut": "Ctrl+Shift+M"
-			}
-		},
+      "FocusMessagePopover": {
+        "shortcut": "Ctrl+Shift+M"
+      }
+    },
     "contentDensities": {
       "compact": true,
       "cozy": true
@@ -102,33 +102,45 @@
       },
       "IncentiveItemModel": {
         "type": "sap.ui.model.json.JSONModel",
-        "settings": {"defaultBindingMode": "TwoWay"},
+        "settings": {
+          "defaultBindingMode": "TwoWay"
+        },
         "preload": false
       },
       "IncentiveHeaderModel": {
         "type": "sap.ui.model.json.JSONModel",
-        "settings": {"defaultBindingMode": "TwoWay"},
+        "settings": {
+          "defaultBindingMode": "TwoWay"
+        },
         "preload": false
       },
       "message": {
         "type": "sap.ui.model.json.JSONModel",
-        "settings": {"defaultBindingMode": "TwoWay"},
+        "settings": {
+          "defaultBindingMode": "TwoWay"
+        },
         "preload": false
       },
       "IncentiveModel": {
         "type": "sap.ui.model.json.JSONModel",
         "uri": "model/incentiveModel.json",
-        "settings": {"defaultBindingMode": "TwoWay"},
+        "settings": {
+          "defaultBindingMode": "TwoWay"
+        },
         "preload": false
       },
       "IncentiveSummaryModel": {
         "type": "sap.ui.model.json.JSONModel",
-        "settings": {"defaultBindingMode": "TwoWay"},
+        "settings": {
+          "defaultBindingMode": "TwoWay"
+        },
         "preload": false
-      }, 
+      },
       "LocalModel": {
         "type": "sap.ui.model.json.JSONModel",
-        "settings": {"defaultBindingMode": "TwoWay"},
+        "settings": {
+          "defaultBindingMode": "TwoWay"
+        },
         "preload": false
       }
     },
